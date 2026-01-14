@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chọn Cấp độ HSK</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c33b22",
+                        "accent": "#FFD700",
+                        "secondary": "#367C6B",
+                        "background-light": "#f6f5f4",
+                        "background-dark": "#22262a",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.bg-cloud-pattern {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBq1GyCu4B1TyUuC2OahOqMMbDTMUA6lyhXouKVe_0M-mLfk2GhYeaFbkrfp66cIkRARuqwqWvgXzK_rPWqr_ihVryuyMBuysWtYFqr7zrH8LRSv1Aq88X6001fZyV_xBlQ6-t5YgwsJ56PozIttnHxPKFTzZ1n-Nxqi781LqVGnmR2LVddtmf5g_YqGKNzBXxR-OM1QGbBERWFQRb2zSZt_yPAhcEI1Byn4kp4tl_1-fAX1BjLD_enHK8NjZW5-nCYrMBLg7i9FJA)
+    }
+.text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
+    }</style>
+</head>
+<body class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-[#1a100f] dark:text-[#fbf9f8] overflow-x-hidden">
+<!-- Background Decoration -->
+<div class="absolute inset-0 z-0 bg-cloud-pattern pointer-events-none"></div>
+<!-- Navigation Bar -->
+<header class="relative z-10 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5dcd6] dark:border-b-white/10 px-6 lg:px-16 py-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-[32px]">temple_buddhist</span>
+</div>
+<h2 class="text-[#1a100f] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">Tiếng Trung HSK</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-9">
+<a class="text-[#5d4037] dark:text-gray-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Trang chủ</a>
+<a class="text-primary font-bold text-sm leading-normal border-b-2 border-primary" href="#">Khóa học</a>
+<a class="text-[#5d4037] dark:text-gray-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Hỗ trợ</a>
+</div>
+<div class="h-8 w-[1px] bg-[#e5dcd6] dark:bg-white/10 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="flex flex-col items-end">
+<span class="text-sm font-bold text-[#1a100f] dark:text-white">Nguyễn Văn A</span>
+<span class="text-xs text-[#935c53]">Học viên VIP</span>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-accent ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark" data-alt="User avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDc8ajGXn0F0pNBDeA4hoQCSAORU-hWLARJf4OpQ017S6PW0IOR3mU1uEZlQabM6eCIhGe8Jzmas7lDYAAFMcyAiPbfExL4ybbFyzAcpkPzZFFCDyVbN987mMnHdB-d51Z2NjnJVUYEyRGeNyQJw047bQ-PvoFW2xKXYwxFiyO9Q4XLJ7_ET5zrf1YGtcCrak4LeqnbDZFnKmm6GhE_gIddvxILGgOKCjh5jPxKzydn1hau7Z0fZyr06UR3PnVQk9Wz6rKrZZ5R8t0");'></div>
+</div>
+</nav>
+<button class="md:hidden text-[#1a100f] dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex-1 flex flex-col items-center py-10 px-4 md:px-8 lg:px-16">
+<div class="w-full max-w-6xl flex flex-col gap-8">
+<!-- Hero Heading -->
+<div class="flex flex-col items-center text-center gap-3 pb-4">
+<div class="inline-flex items-center gap-2 text-primary/80 uppercase tracking-widest text-xs font-bold mb-1">
+<span class="h-[1px] w-8 bg-primary/40"></span>
+                    Lộ trình học tập
+                    <span class="h-[1px] w-8 bg-primary/40"></span>
+</div>
+<h1 class="text-[#1a100f] dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight drop-shadow-sm">
+                    Chọn Cấp độ HSK
+                </h1>
+<p class="text-[#5d4037] dark:text-gray-300 text-lg font-normal max-w-2xl">
+                    Tiếp tục hành trình chinh phục tiếng Trung cùng Mèo Hiệp Khách.
+                </p>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+<!-- Card 1: Completed -->
+<div class="group relative flex flex-col bg-white dark:bg-[#2c3036] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(195,59,34,0.15)] hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-secondary/30 overflow-hidden">
+<div class="absolute top-4 right-4 z-20 bg-secondary/10 backdrop-blur text-secondary rounded-full p-1">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div class="aspect-[4/3] w-full bg-[#fcfbf9] dark:bg-[#343a40] relative overflow-hidden flex items-center justify-center p-6">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary to-transparent"></div>
+<img class="h-full object-contain drop-shadow-lg filter sepia-[.2] opacity-90 transition-transform group-hover:scale-105" data-alt="Wuxia cat beginner pose cute illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaYvNMHw2AFakf_-4Shr_A3rlcCbRhMCuBKlT5R7vsL2-uANqymzxxDXpN_H6xT6JsafZJ9hGXMYjaJBLI9BPSyKN4ZbyxXS8Rgg3Ec1tMSe-Ww4yDtv4AALmEFGdKFieB3-ZWzauIzHnCUxRWueUB03fw5Hm0RUUSYF0lrSWRO3-xMq65BcrO7WzFUqY_rR9p9edIv7ymMeshARwW2bbopUqofWc-sAFXsximsBBXgzDnQm0mmWSiP8epcreIVctt7G_i-d5xPsY"/>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-1">
+<div class="flex justify-between items-baseline">
+<h3 class="text-2xl font-bold text-[#1a100f] dark:text-white group-hover:text-secondary transition-colors">HSK 1</h3>
+<span class="text-sm font-medium text-secondary bg-secondary/10 px-2 py-1 rounded">Đã hoàn thành</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between text-xs mb-2 font-medium text-[#5d4037] dark:text-gray-400">
+<span>Tiến độ</span>
+<span>100%</span>
+</div>
+<div class="h-2 w-full bg-[#e5dcd6] dark:bg-gray-600 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 100%"></div>
+</div>
+<div class="mt-4 text-center">
+<button class="text-secondary font-bold text-sm hover:underline decoration-2 underline-offset-4">Xem lại bài học</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Completed -->
+<div class="group relative flex flex-col bg-white dark:bg-[#2c3036] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_rgba(195,59,34,0.15)] hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-secondary/30 overflow-hidden">
+<div class="absolute top-4 right-4 z-20 bg-secondary/10 backdrop-blur text-secondary rounded-full p-1">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+<div class="aspect-[4/3] w-full bg-[#fcfbf9] dark:bg-[#343a40] relative overflow-hidden flex items-center justify-center p-6">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary to-transparent"></div>
+<img class="h-full object-contain drop-shadow-lg filter sepia-[.2] opacity-90 transition-transform group-hover:scale-105" data-alt="Wuxia cat training pose with staff illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX227dH-SXBgi76Ehg4kqarP7hfwsh7hFcHDScFthvbr1XTPlViB2M5sR3o3spfgjrot72VDQkOQYMtUDUKyj2oR1k-mmZg-SfJctPm5vRwNg936tb3BUGh6zTiNtJv3p5zsnx4vL2B2tMiraDQ30ndQz_kCrls2tjkY6lQDHeWhiZ4CTIm9aGEdHigw4QjCCamlwhV8hkKUUSQeAlQ1DkZuv3PLW6cpSy4jole9S3u-FKkMGlbQG3ss2fcWodM2NJ-jgHIZpSiz8"/>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-1">
+<div class="flex justify-between items-baseline">
+<h3 class="text-2xl font-bold text-[#1a100f] dark:text-white group-hover:text-secondary transition-colors">HSK 2</h3>
+<span class="text-sm font-medium text-secondary bg-secondary/10 px-2 py-1 rounded">Đã hoàn thành</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between text-xs mb-2 font-medium text-[#5d4037] dark:text-gray-400">
+<span>Tiến độ</span>
+<span>100%</span>
+</div>
+<div class="h-2 w-full bg-[#e5dcd6] dark:bg-gray-600 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 100%"></div>
+</div>
+<div class="mt-4 text-center">
+<button class="text-secondary font-bold text-sm hover:underline decoration-2 underline-offset-4">Xem lại bài học</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Active Level (HSK 3) -->
+<div class="group relative flex flex-col bg-white dark:bg-[#2c3036] rounded-xl shadow-[0_8px_30px_rgba(195,59,34,0.15)] ring-2 ring-accent ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark scale-[1.02] md:scale-105 z-10 overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
+<div class="aspect-[4/3] w-full bg-[#fffcf9] dark:bg-[#343a40] relative overflow-hidden flex items-center justify-center p-4">
+<!-- Decorative circle behind cat -->
+<div class="absolute w-32 h-32 rounded-full border border-primary/20 bg-primary/5"></div>
+<div class="absolute w-40 h-40 rounded-full border border-primary/10 animation-pulse"></div>
+<img class="h-[110%] object-contain drop-shadow-xl z-10 transition-transform duration-500 group-hover:scale-110" data-alt="Wuxia cat action pose kung fu style illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWHcy0a8FGt4OUpZGzeRPd068OrxdKE3nTF6RyWA-nToARV2NPNVrztcMxj5YGgCC78Z0eBa3S8GIRDGynbqMzNUYMaCRuDlYpUd4RKLUfnPGIBj8AxCKou4UADVD8jb48PXMxPy-qXmNskIejnyj2SMPImUMUPkLtQxAEymtXwpGEe8XfsJbHyHb1yh0t4YpxKkPvAeBzT2wFkMPdIHxMDn48qXgKEgEJyexHHmxutQ_r8T3syyw4YWvO2PFx_jfT5fmtVzOA0mw"/>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-1">
+<div class="flex justify-between items-center">
+<h3 class="text-3xl font-black text-primary">HSK 3</h3>
+<div class="flex items-center gap-1 text-accent text-xs font-bold uppercase tracking-wider bg-accent/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                                Đang học
+                            </div>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div>
+<div class="flex justify-between text-sm mb-2 font-bold text-[#1a100f] dark:text-gray-200">
+<span>Mèo Hiệp Khách</span>
+<span class="text-primary">45%</span>
+</div>
+<div class="h-3 w-full bg-[#e5dcd6] dark:bg-gray-600 rounded-full overflow-hidden p-[2px]">
+<div class="h-full bg-gradient-to-r from-accent to-yellow-500 rounded-full relative" style="width: 45%">
+<div class="absolute top-0 right-0 bottom-0 w-[2px] bg-white/50"></div>
+</div>
+</div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-[#a9331d] text-[#fbf9f8] text-base font-bold shadow-[0_4px_14px_rgba(195,59,34,0.4)] transition-all active:scale-95">
+<span>Tiếp tục học</span>
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4: Locked -->
+<div class="group relative flex flex-col bg-white/60 dark:bg-[#2c3036]/60 rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#e5dcd6] dark:border-white/5 overflow-hidden grayscale-[0.8] hover:grayscale-0 transition-all duration-500">
+<div class="absolute inset-0 bg-white/40 dark:bg-black/40 z-20 flex items-center justify-center backdrop-blur-[1px] group-hover:backdrop-blur-none group-hover:bg-white/10 transition-all">
+<div class="bg-background-light/90 dark:bg-background-dark/90 p-3 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[#935c53] text-2xl">lock</span>
+</div>
+</div>
+<div class="aspect-[4/3] w-full bg-[#f4f2f0] dark:bg-[#2a2e33] relative overflow-hidden flex items-center justify-center p-8">
+<img class="h-full object-contain opacity-50" data-alt="Wuxia cat advanced pose with sword silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU6RM2mGFYZjPaU0atNDe_bHgEZFZnlI1YGNK9n56uAT3MPf_dnT48JfMmEZHzrgP248Ea51hpPXAK8NDn_KlXhtE_1vHliLtG-cdhPA7w_3ntBY4P7niX8GZtNJTuNn7n_TEHy_duAXSi8W-MghAhe9kT8IRMHLlNhSvPzKhpVz-RjctOJvWR3D1KjZTFntM-ksUYyRmpE_cw4pymRbTNLgb3jNyJxfl4AnBGjdmEKcR8ytmySeViiUqC9sBAn5uR4NR0KeM6szI"/>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-1 opacity-60">
+<div class="flex justify-between items-baseline">
+<h3 class="text-2xl font-bold text-[#5d4037] dark:text-gray-400">HSK 4</h3>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between text-xs mb-2 font-medium text-[#935c53]">
+<span>Chưa mở</span>
+<span>0%</span>
+</div>
+<div class="h-2 w-full bg-[#e5dcd6] dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-[#935c53]" style="width: 0%"></div>
+</div>
+<div class="mt-4 h-9"></div> <!-- Spacer for button height -->
+</div>
+</div>
+</div>
+<!-- Card 5: Locked -->
+<div class="group relative flex flex-col bg-white/60 dark:bg-[#2c3036]/60 rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#e5dcd6] dark:border-white/5 overflow-hidden grayscale-[0.8] hover:grayscale-0 transition-all duration-500">
+<div class="absolute inset-0 bg-white/40 dark:bg-black/40 z-20 flex items-center justify-center backdrop-blur-[1px] group-hover:backdrop-blur-none group-hover:bg-white/10 transition-all">
+<div class="bg-background-light/90 dark:bg-background-dark/90 p-3 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[#935c53] text-2xl">lock</span>
+</div>
+</div>
+<div class="aspect-[4/3] w-full bg-[#f4f2f0] dark:bg-[#2a2e33] relative overflow-hidden flex items-center justify-center p-8">
+<img class="h-full object-contain opacity-50" data-alt="Wuxia cat master pose meditating illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJY0hAc4O8SAAOlYssXu-s6dpDYH8r3TDoEDhojihJXcCqHuVpGeD_TI0Xcw6NPpvG8pQg_tM8YzquP5lEKU0xEt0QgH5Pz5CmmXWCWk1gd_tYdogCzQEVuwjSUzJSoMoRALLd_ugIWX5mbdfrodeQSpD-Z0wXeWIexIP2Jhhwyddb349WVt60WKunOoX_5baZKTcqCKnZE1am8XbcuYX5XdYz8mhj5Dv53ZlHnvoUeFU3qZPv6dkGVrGsQ78ynjjSk0QRtW7YX90"/>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-1 opacity-60">
+<div class="flex justify-between items-baseline">
+<h3 class="text-2xl font-bold text-[#5d4037] dark:text-gray-400">HSK 5</h3>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between text-xs mb-2 font-medium text-[#935c53]">
+<span>Chưa mở</span>
+<span>0%</span>
+</div>
+<div class="h-2 w-full bg-[#e5dcd6] dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-[#935c53]" style="width: 0%"></div>
+</div>
+<div class="mt-4 h-9"></div>
+</div>
+</div>
+</div>
+<!-- Card 6: Locked -->
+<div class="group relative flex flex-col bg-white/60 dark:bg-[#2c3036]/60 rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#e5dcd6] dark:border-white/5 overflow-hidden grayscale-[0.8] hover:grayscale-0 transition-all duration-500">
+<div class="absolute inset-0 bg-white/40 dark:bg-black/40 z-20 flex items-center justify-center backdrop-blur-[1px] group-hover:backdrop-blur-none group-hover:bg-white/10 transition-all">
+<div class="bg-background-light/90 dark:bg-background-dark/90 p-3 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[#935c53] text-2xl">lock</span>
+</div>
+</div>
+<div class="aspect-[4/3] w-full bg-[#f4f2f0] dark:bg-[#2a2e33] relative overflow-hidden flex items-center justify-center p-8">
+<img class="h-full object-contain opacity-50" data-alt="Wuxia cat grandmaster pose flying illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6vxYnPdF3Hs3aj1KM7n0H9-J6p2vrC5OBRlPdePbgCw3V5D_Yc0mzMbFteQcMPJ8xCiNbSVU3JFawHXeOlDYtoWdozMQJaauSUd1uOWWFXjvD4ep429TsEgVPxQRrwrsBbpwpJ1MQx1X5UHgSppnxHMzzbcx8YKHrH83Ww_dKW-Qf7gEwNZW6mdy4dyQdMj07m3oXPv5Zso8mFmIMnSt8OCcp6LceZFoG8NPgV6-RBujabg4pTxdcUZ5wdqJaU6TE6H9CJJGF4Q"/>
+</div>
+<div class="p-6 flex flex-col gap-4 flex-1 opacity-60">
+<div class="flex justify-between items-baseline">
+<h3 class="text-2xl font-bold text-[#5d4037] dark:text-gray-400">HSK 6</h3>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between text-xs mb-2 font-medium text-[#935c53]">
+<span>Chưa mở</span>
+<span>0%</span>
+</div>
+<div class="h-2 w-full bg-[#e5dcd6] dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="h-full bg-[#935c53]" style="width: 0%"></div>
+</div>
+<div class="mt-4 h-9"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer decoration (Optional subtle visual anchor) -->
+<div class="w-full h-24 bg-gradient-to-t from-[#e5dcd6]/30 to-transparent pointer-events-none"></div>
+</body></html>

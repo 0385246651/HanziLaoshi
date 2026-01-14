@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trò chơi Lật thẻ Ghi nhớ - Hán Ngữ Wuxia</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1dc9ac",
+              "primary-dark": "#15867E",
+              "background-light": "#59262f",
+              "background-dark": "#22252a",
+              "accent-gold": "#E6B96E",
+              "off-white": "#FDFCF7",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            backgroundImage: {
+                'oriental-pattern': "radial-gradient(circle at 50% 50%, #6C343B 0%, #59262f 100%)",
+            },
+            boxShadow: {
+                'card-rest': '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
+                'card-float': '0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2)',
+                'glow': '0 0 15px rgba(29, 201, 172, 0.6)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom utilities for 3D card flip effect since Tailwind doesn't have them all built-in by default */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        
+        /* Custom Scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #59262f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+
+        /* Lattice Pattern Overlay */
+        .lattice-bg {
+            background-image: 
+                linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1)),
+                linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1));
+            background-position: 0 0, 20px 20px;
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display overflow-x-hidden min-h-screen flex flex-col lattice-bg text-white">
+<!-- Top Navigation Bar -->
+<nav class="w-full px-6 py-4 flex items-center justify-between border-b border-white/10 bg-background-light/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<a class="flex items-center gap-3 group" href="#">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-background-light transform transition-transform group-hover:rotate-12">
+<span class="material-symbols-outlined text-3xl">local_fire_department</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-xl font-bold leading-tight tracking-tight">Hán Ngữ Wuxia</h1>
+<span class="text-xs text-white/60 font-medium">Học tiếng Trung phong cách kiếm hiệp</span>
+</div>
+</a>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-semibold" href="#">Trang chủ</a>
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-semibold" href="#">Bài học</a>
+<a class="text-primary font-bold text-sm" href="#">Luyện tập</a> <!-- Active state -->
+<a class="text-white/80 hover:text-primary transition-colors text-sm font-semibold" href="#">Xếp hạng</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end mr-2">
+<span class="text-sm font-bold">Đại hiệp Nguyễn</span>
+<span class="text-xs text-primary">Cấp độ 5</span>
+</div>
+<div class="size-10 rounded-full border-2 border-primary bg-cover bg-center cursor-pointer hover:ring-4 ring-primary/30 transition-all" data-alt="User avatar illustration of a young martial artist" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbzebSlxfaVGgxvNBINAbCnXhxA8I9DDDo9vafcvjhHDRPTRDZpLktoJIcqqLGtYLQrBh83wMztOjwDFrtB3DmDVHu3Gf47QYNguaG5xmE_3FR2SKow157pPcg3WXs0tcSaKcvi3LTCtwSGj_AfGA9lV7NyTGkWDuan3VDtmKkItzQkoaTGrfheAHVVSh_LdD3PdVbhQ_RlkR9C8pE3MVYkVDA6cosLYj9_Y2T1TIDrHjfXJCTW_uKB5bXM8FE98WhrjqCOkeQI84");'>
+</div>
+</div>
+</nav>
+<!-- Main Game Container -->
+<main class="flex-grow flex flex-col lg:flex-row max-w-[1400px] w-full mx-auto p-4 lg:p-8 gap-8 relative z-10">
+<!-- Sidebar: Stats & Mascot (Mobile: Top, Desktop: Left Sticky) -->
+<aside class="flex flex-col lg:w-1/4 gap-6 shrink-0 order-2 lg:order-1">
+<!-- Context Header -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-lg">school</span>
+                    HSK 1 - Bài 5
+                </div>
+<h2 class="text-3xl font-bold text-off-white">Chủ đề: Gia đình</h2>
+<p class="text-white/60 text-sm">Tìm các cặp từ Hán tự và nghĩa tiếng Việt tương ứng.</p>
+</div>
+<!-- Stats Card -->
+<div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 flex flex-col gap-6 shadow-xl">
+<!-- Timer -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-white/70">Thời gian còn lại</span>
+<span class="text-primary font-mono font-bold text-xl">01:15</span>
+</div>
+<div class="h-3 w-full bg-black/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full shadow-[0_0_10px_rgba(29,201,172,0.6)]"></div>
+</div>
+</div>
+<!-- Score Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-background-light p-4 rounded-xl border border-white/5 flex flex-col items-center justify-center gap-1">
+<span class="text-white/60 text-xs uppercase font-bold">Điểm số</span>
+<span class="text-2xl font-bold text-accent-gold">120</span>
+</div>
+<div class="bg-background-light p-4 rounded-xl border border-white/5 flex flex-col items-center justify-center gap-1">
+<span class="text-white/60 text-xs uppercase font-bold">Cặp đã tìm</span>
+<span class="text-2xl font-bold text-primary">4<span class="text-white/40 text-lg">/8</span></span>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex gap-3 pt-2">
+<button class="flex-1 bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">refresh</span>
+                        Chơi lại
+                    </button>
+<button class="flex-1 bg-primary hover:bg-primary-dark text-background-light py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">pause</span>
+                        Tạm dừng
+                    </button>
+</div>
+</div>
+<!-- Mascot Area (Hidden on small mobile) -->
+<div class="relative hidden sm:flex flex-col items-center justify-end flex-grow mt-4 min-h-[200px]">
+<!-- Speech Bubble -->
+<div class="absolute -top-4 right-0 bg-white text-background-light px-4 py-2 rounded-xl rounded-br-none shadow-lg animate-bounce duration-1000">
+<p class="font-bold text-sm">Tuyệt vời! Cố lên!</p>
+</div>
+<!-- Mascot Image -->
+<div class="w-full h-64 bg-contain bg-center bg-no-repeat drop-shadow-2xl hover:scale-105 transition-transform duration-300" data-alt="Cute wuxia cat mascot wearing a traditional robe and cheering" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHcChI4OVXEIjO0GJa3hFUXCdlUYsk6M0U2o0R5NbxA8Z4nUJa2WmNUP5Rchss1a-5sPyccI8RzgQjC5THAu6vGoP9nZmOikGfxwWB9B6ipXcg91CdhasMQ7ULaulsThsYIp618SIBHOvnWSZhQJ0453s-6XRC70G2427_Pi7-UOB9lHlgmI72drZiK0aGcTvoqFmhnaEMpu0Mnn8khqWiSp4wb2_OxKHeG9Js7AdZnubmHOvOt5W1XwQgsrqTdWM5KA_rPu_uh3k'); /* Placeholder for illustration style */">
+<!-- Fallback visual if image fails: A gradient circle -->
+<div class="w-full h-full bg-gradient-to-t from-transparent to-primary/20 rounded-full opacity-20 -z-10 absolute bottom-0"></div>
+</div>
+</div>
+</aside>
+<!-- Game Area: The Grid -->
+<section class="flex-grow lg:w-3/4 flex flex-col items-center justify-center order-1 lg:order-2">
+<!-- The Card Grid -->
+<!-- 4x4 Grid -->
+<div class="grid grid-cols-4 gap-3 sm:gap-4 md:gap-6 w-full max-w-[800px] mx-auto perspective-1000">
+<!-- Card 1: Face Down -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<!-- Front (Face Down) -->
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+<!-- Back (Hidden) -->
+<div class="absolute w-full h-full bg-off-white rounded-xl shadow-card-float border-4 border-primary rotate-y-180 backface-hidden flex items-center justify-center">
+<span class="text-background-light text-xl font-bold">...</span>
+</div>
+</div>
+</div>
+<!-- Card 2: MATCHED PAIR (Face Up) -->
+<div class="aspect-[3/4] perspective-1000 cursor-default">
+<div class="relative w-full h-full transform-style-3d rotate-y-180">
+<!-- Back (Visible - Content) -->
+<div class="absolute w-full h-full bg-off-white rounded-xl shadow-glow border-4 border-primary rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-1 sm:gap-2">
+<span class="text-background-light text-3xl sm:text-5xl font-extrabold font-display">你好</span>
+<span class="text-gray-400 text-xs font-mono">nǐ hǎo</span>
+<!-- Status Indicator -->
+<div class="absolute top-2 right-2 size-6 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: MATCHED PAIR (Face Up) -->
+<div class="aspect-[3/4] perspective-1000 cursor-default">
+<div class="relative w-full h-full transform-style-3d rotate-y-180">
+<!-- Back (Visible - Content) -->
+<div class="absolute w-full h-full bg-off-white rounded-xl shadow-glow border-4 border-primary rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-1 sm:gap-2">
+<span class="text-background-light text-sm sm:text-lg font-bold font-display text-center px-2">Xin chào</span>
+<!-- Status Indicator -->
+<div class="absolute top-2 right-2 size-6 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4: Face Down -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<!-- Card 5: ACTIVE SELECTION (Face Up - Waiting for match) -->
+<div class="aspect-[3/4] perspective-1000 cursor-pointer">
+<div class="relative w-full h-full transform-style-3d rotate-y-180 duration-500">
+<!-- Back (Visible) -->
+<div class="absolute w-full h-full bg-off-white rounded-xl shadow-card-float border-4 border-accent-gold rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-1 sm:gap-2">
+<span class="text-background-light text-3xl sm:text-5xl font-extrabold font-display">谢谢</span>
+<span class="text-gray-400 text-xs font-mono">xiè xie</span>
+</div>
+</div>
+</div>
+<!-- Card 6: Face Down (Correct Match for Card 5) -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 group-hover:shadow-card-float transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<!-- Card 7: Face Down -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<!-- Card 8: Face Down -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+<div class="aspect-[3/4] group perspective-1000 cursor-pointer">
+<div class="relative w-full h-full duration-500 transform-style-3d group-hover:-translate-y-2 transition-all">
+<div class="absolute w-full h-full bg-primary rounded-xl shadow-card-rest border-2 border-white/10 flex items-center justify-center backface-hidden">
+<span class="material-symbols-outlined text-background-light/30 text-4xl sm:text-6xl">spa</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating "Exit" Button for easy escape -->
+<div class="fixed bottom-6 right-6 z-40">
+<button class="size-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-red-600 transition-all shadow-lg group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">logout</span>
+</button>
+</div>
+</body></html>

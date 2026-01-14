@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HSK Smart Test - Learner Dashboard</title>
+<!-- Fonts and Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffc629",
+                        "secondary-red": "#e7564a",
+                        "jade-green": "#3c8c70",
+                        "background-light": "#fcfbf8",
+                        "background-dark": "#231e0f",
+                        "text-main": "#1d180c",
+                        "text-sub": "#a18845",
+                        "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    backgroundImage: {
+                        'cloud-pattern': "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yMCAyMGM1IDAgMTAgNSAxMCAxMHMtNSAxMC0xMCAxMC0xMC01LTEwLTEwIDUtMTAgMTAtMTB6IiBmaWxsPSIjZjRmMGU2IiBmaWxsLW9wYWNpdHk9IjAuNCIvPgo8L3N2Zz4=')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: #fcfbf8;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5e0d0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4cfbe;
+        }
+
+        .mountain-path::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: 28px; /* Center of the icon circle (56px/2) */
+            width: 4px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #eae2cd 0px,
+                #eae2cd 12px,
+                transparent 12px,
+                transparent 20px
+            );
+            z-index: 0;
+        }
+
+        .path-node {
+            z-index: 10;
+        }
+        
+        .mascot-bounce {
+            animation: bounce 2s infinite ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation -->
+<header class="h-16 flex items-center justify-between px-6 border-b border-[#f0ebe0] bg-white z-30 shrink-0">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-[#1d180c]">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<h2 class="text-[#1d180c] text-lg font-bold leading-tight tracking-[-0.015em]">HSK Smart Test</h2>
+</div>
+<!-- Search Bar -->
+<label class="hidden md:flex flex-col min-w-[320px] h-10">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-[#f4f0e6] transition-colors hover:bg-[#ebe5d5]">
+<div class="text-[#a18845] flex border-none items-center justify-center pl-4 pr-2">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 bg-transparent border-none focus:outline-0 focus:ring-0 text-[#1d180c] placeholder:text-[#a18845] px-2 text-sm font-medium" placeholder="Tra từ điển Hán - Việt..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 text-secondary-red border border-red-100">
+<span class="material-symbols-outlined text-[18px] filled">local_fire_department</span>
+<span class="text-sm font-bold">12 Ngày</span>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-[#f4f0e6] text-[#1d180c] hover:bg-[#ebe5d5] transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-secondary-red rounded-full border border-white"></span>
+</button>
+<div class="size-10 rounded-full bg-gray-200 bg-center bg-cover border-2 border-white shadow-sm cursor-pointer" data-alt="User avatar of a young student" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDv3M753EZCRSdhc5h0V-yHbW1kXuO9MoImFIqznymXRwA_6YBy-BmOiMdNsFiVb07_5M9fcuZZmuZ8eAhAeoA47aJ5gWdzvsGx9kqKUk_s3b5S_eR7pCpVDTuUWB404EmUrwoTPa7P6NEaeCBWWwymnQHoI_6fUa3vwQNnZDq5pevnw1sybgSTnq_X_3XIi61b5dObj8-ID1AcnAhU3Sq2Syr8cxQBwYqMzLzU54HUSX-MIYQeYc1T0k_u5o-f9edcKBnspgvGwrk");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-20 lg:w-64 bg-white border-r border-[#f0ebe0] flex flex-col py-6 px-4 gap-2 shrink-0 overflow-y-auto">
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl bg-[#fffcf0] text-primary border border-[#f5edd0]" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="hidden lg:block text-sm font-bold text-text-main">Trang chủ</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#6b5c35] hover:bg-[#f4f0e6] transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">menu_book</span>
+<span class="hidden lg:block text-sm font-medium">Từ điển</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#6b5c35] hover:bg-[#f4f0e6] transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">history_edu</span>
+<span class="hidden lg:block text-sm font-medium">Ngữ pháp</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#6b5c35] hover:bg-[#f4f0e6] transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">leaderboard</span>
+<span class="hidden lg:block text-sm font-medium">Bảng xếp hạng</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#6b5c35] hover:bg-[#f4f0e6] transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="hidden lg:block text-sm font-medium">Hồ sơ</span>
+</a>
+</nav>
+<div class="mt-auto hidden lg:flex flex-col gap-4 p-4 rounded-2xl bg-gradient-to-br from-[#fcfbf8] to-[#f4f0e6] border border-[#ebe5d5]">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-jade-green">workspace_premium</span>
+<span class="text-sm font-bold text-[#1d180c]">HSK Plus</span>
+</div>
+<p class="text-xs text-[#6b5c35]">Mở khóa tất cả bài học và tính năng nâng cao.</p>
+<button class="w-full py-2 bg-text-main text-white rounded-lg text-xs font-bold hover:bg-black transition-colors">Nâng cấp ngay</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col lg:flex-row overflow-hidden bg-cloud-pattern bg-repeat">
+<!-- Center Column: Adventure Path -->
+<div class="flex-1 overflow-y-auto px-4 lg:px-12 py-8 scroll-smooth">
+<div class="max-w-3xl mx-auto flex flex-col gap-8">
+<!-- Welcome Hero Card -->
+<div class="relative overflow-hidden rounded-3xl bg-white shadow-[0_4px_20px_rgba(29,24,12,0.04)] border border-[#f0ebe0] p-6 sm:p-8 group">
+<!-- Decorative bg -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-[#fff9e6] -skew-x-12 translate-x-10 z-0"></div>
+<div class="relative z-10 flex flex-col sm:flex-row items-center gap-6">
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-2 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-[#fff4cc] text-[#a18845]">Buổi sáng tốt lành</span>
+</div>
+<h1 class="text-2xl sm:text-3xl font-bold text-[#1d180c] mb-2 tracking-tight">Chào mừng trở lại, Minh!</h1>
+<p class="text-[#6b5c35] text-sm sm:text-base mb-6">Bạn đang làm rất tốt! Hãy tiếp tục hành trình chinh phục HSK 3.</p>
+<div class="flex flex-wrap justify-center sm:justify-start gap-3">
+<button class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-[#ffcf4d] text-[#1d180c] font-bold rounded-xl transition-transform hover:scale-105 shadow-sm shadow-orange-200">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+<span>Học tiếp ngay</span>
+</button>
+<div class="px-4 py-3 bg-[#f8f8f5] rounded-xl text-[#6b5c35] text-sm font-medium border border-[#eae2cd]">
+                                        Bài 4: Sở thích
+                                    </div>
+</div>
+</div>
+<div class="w-32 sm:w-40 shrink-0 relative">
+<!-- Mascot Place holder -->
+<div class="aspect-square bg-orange-100 rounded-full flex items-center justify-center relative overflow-hidden border-4 border-white shadow-lg" style="background: radial-gradient(circle at 30% 30%, #ffd699, #ffaf4d);">
+<img class="w-full h-full object-cover opacity-90 mix-blend-overlay" data-alt="Orange cat texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8jzwgKTc7TeAi1JunA8xvhm86S4Vt79XEC94oln33Y6IrnKBUE2xSoKYPvJpYlnB0Q0cJLCDVOxU_K0FBozk8IE7XRsXbX_CAS_svhqhxIznKd5ChRQ6F1l2WJD6w04ZZAcQnKVeU9FW-Dc_pLdG4y_YRgkcJcweIxo0bEUjWkMjRXcOuNx2-akN4AyLJ2TbVx7DEvNWbXTwtH6wDtIcJEMa6dR4Dtb3OxK7UwWcadCWi2c4HJgysq0WO2Y9s6AAkypaGROcU5ZY"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Simulating the cat mascot with an icon for now -->
+<span class="material-symbols-outlined text-white text-[80px] drop-shadow-md">pets</span>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-jade-green text-white text-xs font-bold px-3 py-1 rounded-full border-2 border-white shadow-sm">
+                                    Lvl. 12
+                                </div>
+</div>
+</div>
+</div>
+<!-- HSK Mountain Path -->
+<div class="relative py-4 pl-4">
+<h3 class="text-lg font-bold text-[#1d180c] mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">landscape</span>
+                            Lộ trình chinh phục
+                        </h3>
+<div class="mountain-path relative flex flex-col gap-16 pb-12">
+<!-- HSK 6 (Locked) -->
+<div class="flex gap-6 items-center opacity-60">
+<div class="path-node size-14 rounded-full bg-[#f4f0e6] border-4 border-[#e5e0d0] flex items-center justify-center shrink-0 z-10 text-[#a18845]">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div class="flex-1 p-4 rounded-2xl bg-white border border-[#f0ebe0] flex justify-between items-center shadow-sm">
+<div>
+<h4 class="font-bold text-[#1d180c]">HSK 6: Đỉnh cao</h4>
+<p class="text-xs text-[#a18845]">Hơn 5000 từ vựng</p>
+</div>
+<div class="px-3 py-1 rounded-lg bg-[#f4f0e6] text-[#a18845] text-xs font-bold">Khóa</div>
+</div>
+</div>
+<!-- HSK 5 (Locked) -->
+<div class="flex gap-6 items-center opacity-60">
+<div class="path-node size-14 rounded-full bg-[#f4f0e6] border-4 border-[#e5e0d0] flex items-center justify-center shrink-0 z-10 text-[#a18845]">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div class="flex-1 p-4 rounded-2xl bg-white border border-[#f0ebe0] flex justify-between items-center shadow-sm">
+<div>
+<h4 class="font-bold text-[#1d180c]">HSK 5: Cao cấp</h4>
+<p class="text-xs text-[#a18845]">2500 từ vựng</p>
+</div>
+<div class="px-3 py-1 rounded-lg bg-[#f4f0e6] text-[#a18845] text-xs font-bold">Khóa</div>
+</div>
+</div>
+<!-- HSK 4 (Locked) -->
+<div class="flex gap-6 items-center opacity-70">
+<div class="path-node size-14 rounded-full bg-[#f4f0e6] border-4 border-[#e5e0d0] flex items-center justify-center shrink-0 z-10 text-[#a18845]">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<div class="flex-1 p-4 rounded-2xl bg-white border border-[#f0ebe0] flex justify-between items-center shadow-sm">
+<div>
+<h4 class="font-bold text-[#1d180c]">HSK 4: Trung cấp</h4>
+<p class="text-xs text-[#a18845]">1200 từ vựng</p>
+</div>
+<div class="px-3 py-1 rounded-lg bg-[#f4f0e6] text-[#a18845] text-xs font-bold">Khóa</div>
+</div>
+</div>
+<!-- HSK 3 (Active) -->
+<div class="flex gap-6 items-center relative">
+<!-- Mascot Positioned -->
+<div class="absolute -left-[14px] -top-[50px] z-20 mascot-bounce pointer-events-none">
+<div class="relative">
+<div class="w-20 h-20 bg-[url('https://images.unsplash.com/photo-1548681528-6a5c45b66474?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=200&amp;q=80')] bg-cover rounded-full border-4 border-white shadow-xl" data-alt="Cute cat face wearing bandana"></div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-secondary-red text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap border border-white">
+                                            Cố lên!
+                                        </div>
+</div>
+</div>
+<div class="path-node size-14 rounded-full bg-primary border-4 border-[#ffeeb0] flex items-center justify-center shrink-0 z-10 shadow-[0_0_15px_rgba(255,198,41,0.5)] cursor-pointer hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-[28px] drop-shadow-md">star</span>
+</div>
+<div class="flex-1 p-5 rounded-2xl bg-white border-2 border-primary/20 shadow-[0_4px_15px_rgba(255,198,41,0.15)] flex justify-between items-center relative overflow-hidden group hover:border-primary/50 transition-colors cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-1">
+<h4 class="font-bold text-[#1d180c] text-lg">HSK 3: Hiện tại</h4>
+<span class="flex size-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<p class="text-sm text-[#6b5c35]">Bài 4/20 • 600 từ vựng</p>
+<div class="w-full max-w-[120px] h-1.5 bg-[#eae2cd] rounded-full mt-2">
+<div class="h-full bg-primary rounded-full" style="width: 35%"></div>
+</div>
+</div>
+<div class="relative z-10">
+<button class="size-10 rounded-full bg-primary text-[#1d180c] flex items-center justify-center shadow-sm hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- HSK 2 (Completed) -->
+<div class="flex gap-6 items-center">
+<div class="path-node size-14 rounded-full bg-jade-green border-4 border-[#bce3d4] flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-white text-[24px]">check</span>
+</div>
+<div class="flex-1 p-4 rounded-2xl bg-[#f0fdf7] border border-[#dcfce7] flex justify-between items-center opacity-80 hover:opacity-100 transition-opacity">
+<div>
+<h4 class="font-bold text-[#155e42]">HSK 2: Cơ bản</h4>
+<p class="text-xs text-[#3c8c70]">Hoàn thành xuất sắc</p>
+</div>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-primary text-[18px]">star</span>
+<span class="material-symbols-outlined text-primary text-[18px]">star</span>
+<span class="material-symbols-outlined text-primary text-[18px]">star</span>
+</div>
+</div>
+</div>
+<!-- HSK 1 (Completed) -->
+<div class="flex gap-6 items-center">
+<div class="path-node size-14 rounded-full bg-jade-green border-4 border-[#bce3d4] flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-white text-[24px]">check</span>
+</div>
+<div class="flex-1 p-4 rounded-2xl bg-[#f0fdf7] border border-[#dcfce7] flex justify-between items-center opacity-80 hover:opacity-100 transition-opacity">
+<div>
+<h4 class="font-bold text-[#155e42]">HSK 1: Khởi đầu</h4>
+<p class="text-xs text-[#3c8c70]">Đã hoàn thành</p>
+</div>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-primary text-[18px]">star</span>
+<span class="material-symbols-outlined text-primary text-[18px]">star</span>
+<span class="material-symbols-outlined text-primary text-[18px]">star_half</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Widgets -->
+<aside class="hidden xl:flex w-80 bg-white border-l border-[#f0ebe0] flex-col p-6 gap-6 shrink-0 overflow-y-auto">
+<!-- Daily Goal Widget -->
+<div class="rounded-2xl p-5 border border-[#f0ebe0] bg-white shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-[#1d180c]">Mục tiêu ngày</h3>
+<span class="text-xs font-bold text-primary bg-[#fff8e1] px-2 py-1 rounded-lg">30/50 XP</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative size-16 shrink-0">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+<path class="text-[#f4f0e6]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="60, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">bolt</span>
+</div>
+</div>
+<div class="flex flex-col">
+<p class="text-sm text-[#6b5c35] leading-tight mb-1">Cố lên, bạn sắp hoàn thành rồi!</p>
+<button class="text-xs font-bold text-secondary-red hover:underline text-left">Nhận thưởng ngay</button>
+</div>
+</div>
+</div>
+<!-- Vocabulary Widget -->
+<div class="rounded-2xl p-5 border border-[#f0ebe0] bg-[#fcfbf8] shadow-sm flex flex-col gap-4">
+<h3 class="font-bold text-[#1d180c] flex items-center gap-2">
+<span class="material-symbols-outlined text-[#6b5c35]">style</span>
+                        Kho từ vựng
+                    </h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 rounded-xl bg-[#ecfdf5] border border-[#d1fae5] flex flex-col items-center justify-center gap-1">
+<span class="text-2xl font-bold text-jade-green">245</span>
+<span class="text-xs font-medium text-[#047857]">Đã nhớ</span>
+</div>
+<div class="p-3 rounded-xl bg-[#fef2f2] border border-[#fee2e2] flex flex-col items-center justify-center gap-1">
+<span class="text-2xl font-bold text-secondary-red">12</span>
+<span class="text-xs font-medium text-[#b91c1c]">Chưa biết</span>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-xl border border-[#ebe5d5] bg-white text-sm font-bold text-[#6b5c35] hover:bg-[#f4f0e6] transition-colors">
+                        Ôn tập từ vựng
+                    </button>
+</div>
+<!-- Daily Challenge Teaser -->
+<div class="rounded-2xl overflow-hidden relative min-h-[160px] flex flex-col justify-end p-4 group cursor-pointer shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105" data-alt="Traditional Chinese tea ceremony setting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMMKzeHE8lPJQuTXtPPW8KLvwm4L0-0Utf2wOjYcBDBHkoudHJHNryJxe3uYDuEYwb7eckyhFJ2_BVo2SM-1mb34bS-FhlWcQb6pONXbW7KzbtO8-1Rj-f77QnJVPYtkRxmicth2wQDEjHdrA2IB9NXfEAQxiGIUtEUVsCDkcguIWxR111_jUdWvLw-4AcPIh6ED54M9t7NjBEp05_usMG4HXJLkcIvsxhbY82Wt5nADo9aqb9qX56pdHcy6q5IjcFYEvgGSnVMAA');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="relative z-10 text-white">
+<div class="bg-primary text-[#1d180c] text-[10px] font-bold px-2 py-0.5 rounded w-fit mb-2 uppercase tracking-wide">Thử thách</div>
+<h4 class="font-bold text-lg leading-tight mb-1">Văn hóa Trà Đạo</h4>
+<p class="text-xs text-gray-200 opacity-90">Học từ vựng qua văn hóa</p>
+</div>
+</div>
+<!-- Friend Activity (Mini) -->
+<div class="flex flex-col gap-3">
+<h3 class="font-bold text-[#1d180c] text-sm text-[#a18845] uppercase tracking-wider">Bạn bè</h3>
+<div class="flex items-center gap-3 p-2 hover:bg-[#f4f0e6] rounded-xl transition-colors cursor-pointer">
+<div class="size-8 rounded-full bg-blue-100 bg-cover" data-alt="Friend avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3AqK5cnJ81vdddTMKVo0RZ_VQDCLbOo9kUBYnP8hiKlHSILaXt0EX2kyLK9PbEg5CQsQbgzQFshEDxs2JzQHwotSnEZF2AHZypJSpIzNbNSS2UgN-HBWEbmbOPiG-OnNwfBwkINV7ZBSDsKhS6Dh5KmHFk3ETbNkK3_ioTG6fqg0KfnSZ6HleLwrvkuzTbwkDPLceUeQBhIkllWwFltC7aaO7OxxicGrB4_YluFkD3Hx33YhcLFxkj-5qMo_-rh5R2Ynp9NKIqHU')"></div>
+<div class="flex-1">
+<p class="text-sm font-bold text-[#1d180c]">Lan Anh</p>
+<p class="text-xs text-[#a18845]">Vừa hoàn thành HSK 2</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 hover:bg-[#f4f0e6] rounded-xl transition-colors cursor-pointer">
+<div class="size-8 rounded-full bg-pink-100 bg-cover" data-alt="Friend avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAEGQNb0iUmyanlczwpfYe1mlHVRw6SmK4p0l7g7lTK3fpBDeCOY-jRd-aCPVoDArwWqSTHBya0ROO5knmgdfg9gi_eEDlOLE-HyRkwFk389h9miK-5pkTTUiZGwv7zQPXgKcceQB2b4G6H-Vbso3oYUk_XJhjQJfoFwyCVMr0C0nIYWa09BJTWse1t-WVwzpEkFU-iLRjeGrkIkYk7B5JtTmooTAQuxNrpkHVNtSFAbS5TPnGsH6zivbCFfEiNqnFfDTzK_fBtYwU')"></div>
+<div class="flex-1">
+<p class="text-sm font-bold text-[#1d180c]">Thu Hà</p>
+<p class="text-xs text-[#a18845]">Đang học 50 từ mới</p>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

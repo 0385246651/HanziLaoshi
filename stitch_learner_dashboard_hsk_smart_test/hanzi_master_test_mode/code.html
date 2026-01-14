@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hanzi Master - Battle Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffc629",
+                        "primary-hover": "#e5b225",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#231e0f",
+                        "jade": "#3C8C70",
+                        "jade-light": "#e3f2ed",
+                        "danger": "#E7564A",
+                        "paper": "#fcfbf8",
+                        "paper-dark": "#1e1b11",
+                        "ink": "#1d180c",
+                        "ink-light": "#6b665c",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'wuxia-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffc629' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+        }
+        
+        .battle-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(255, 198, 41, 0.5);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .mascot-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-ink dark:text-[#f4f0e6] min-h-screen flex flex-col transition-colors duration-200">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-paper/80 dark:bg-paper-dark/80 backdrop-blur-md border-b border-[#f4f0e6] dark:border-[#3a3525]">
+<div class="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo Area -->
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary bg-ink dark:bg-white dark:text-primary rounded-lg flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<h2 class="text-ink dark:text-white text-lg font-bold tracking-tight">Hanzi Master</h2>
+</div>
+<!-- Nav Links -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-ink dark:text-[#f4f0e6] text-sm font-semibold hover:text-primary transition-colors" href="#">Học tập</a>
+<a class="text-ink-light dark:text-[#a19d95] text-sm font-medium hover:text-primary transition-colors" href="#">Kho từ vựng</a>
+<a class="text-ink-light dark:text-[#a19d95] text-sm font-medium hover:text-primary transition-colors" href="#">Xếp hạng</a>
+</nav>
+<!-- User Actions -->
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-1 bg-[#fffefa] dark:bg-[#2a261a] border border-[#eaddc5] dark:border-[#443e2e] px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-[18px]">local_fire_department</span>
+<span class="text-xs font-bold text-ink dark:text-white">12 ngày</span>
+</div>
+<button class="flex items-center justify-center size-9 rounded-full bg-paper dark:bg-[#2a261a] border border-[#eaddc5] dark:border-[#443e2e] hover:bg-background-light dark:hover:bg-[#363022] transition-colors">
+<span class="material-symbols-outlined text-ink-light dark:text-[#a19d95] text-[20px]">settings</span>
+</button>
+<div class="size-9 rounded-full bg-gradient-to-tr from-primary to-[#ffe085] p-0.5 cursor-pointer">
+<img class="w-full h-full rounded-full object-cover border-2 border-white dark:border-[#1e1b11]" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdc9O1cNMgE3dptHrcSyzf4_9AoXDO9CEGqymwBsZYy0lgGlNoFOV_ewD-JqtO1xB0x5k9oXrCCMYGwvl3WgDe4DLXGG59k2IdLJFqvbTJSn3_2Tem-drnPmveGkJGMUEHSY3DoHji0n-AwIDAiXpHVL6ag8UpZwGfZ4nyrCpAjrzUBmn8DRoyi67zeEMnzkuOtSwtc9gzbqEj1R7Qf5i1saqnXHNPHQb2A_SmrwIiKiw39HGvBdIHFm6jOxE6DF7OB1rAfVWCcZw"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center px-4 py-6 md:py-10 w-full max-w-[1440px] mx-auto">
+<!-- Header & Progress -->
+<div class="w-full max-w-5xl mb-8 flex flex-col gap-6">
+<!-- Breadcrumb/Title -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 text-jade text-sm font-bold mb-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-[18px]">swords</span>
+                        Chế độ Chiến đấu
+                    </div>
+<h1 class="text-3xl md:text-4xl font-extrabold text-ink dark:text-white tracking-tight">Cấp độ: HSK 3</h1>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#2a261a] rounded-lg border border-[#eaddc5] dark:border-[#3a3525] shadow-sm">
+<span class="material-symbols-outlined text-primary">timer</span>
+<span class="font-mono font-bold text-ink dark:text-white">04:23</span>
+</div>
+</div>
+<!-- Enhanced Progress Bar -->
+<div class="w-full">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-ink-light dark:text-[#a19d95]">Tiến độ trận đấu</span>
+<span class="text-sm font-bold text-primary">4/10 kẻ địch</span>
+</div>
+<div class="h-3 w-full bg-[#eae2cd] dark:bg-[#3a3525] rounded-full overflow-hidden relative">
+<!-- Striped background for empty part -->
+<div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 10px, transparent 10px, transparent 20px);"></div>
+<div class="h-full bg-primary rounded-full relative overflow-hidden transition-all duration-500 ease-out" style="width: 40%">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- The BATTLE ARENA Card -->
+<div class="relative w-full max-w-5xl bg-paper dark:bg-paper-dark rounded-[32px] border border-[#eaddc5] dark:border-[#3a3525] battle-shadow flex flex-col lg:flex-row overflow-hidden group/arena">
+<!-- Decorative corner flourishes -->
+<div class="absolute top-0 left-0 w-16 h-16 border-l-4 border-t-4 border-primary/20 rounded-tl-[30px] pointer-events-none"></div>
+<div class="absolute bottom-0 right-0 w-16 h-16 border-r-4 border-b-4 border-primary/20 rounded-br-[30px] pointer-events-none"></div>
+<!-- Left Side: Learning & Input -->
+<div class="flex-1 p-6 md:p-10 lg:p-14 flex flex-col justify-center relative z-10 bg-paper dark:bg-paper-dark">
+<!-- Prompt Area -->
+<div class="flex flex-col items-center gap-3 mb-10">
+<span class="text-xs font-bold tracking-widest text-ink-light dark:text-[#a19d95] uppercase opacity-60">Dịch sang Hán tự</span>
+<h2 class="text-[56px] md:text-[64px] font-extrabold text-ink dark:text-white leading-none text-center tracking-tight drop-shadow-sm">
+                        Con mèo
+                    </h2>
+<!-- Pinyin Pill -->
+<div class="mt-2 px-6 py-2 rounded-2xl bg-jade/10 border border-jade/20 text-jade dark:text-[#5ecba6] font-mono text-xl md:text-2xl font-medium tracking-wide shadow-sm">
+                        māo
+                    </div>
+</div>
+<!-- Input Area -->
+<div class="w-full max-w-md mx-auto relative group mb-8">
+<!-- Status Indicator Border (Active state shown) -->
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-[#ffdb73] rounded-2xl opacity-70 blur transition duration-200 group-hover:opacity-100 group-focus-within:opacity-100 group-focus-within:blur-md"></div>
+<input autofocus="" class="relative w-full h-20 text-center text-4xl font-bold bg-white dark:bg-[#2a261a] text-ink dark:text-white rounded-xl border-2 border-transparent focus:border-white focus:ring-0 placeholder:text-[#dcd6c3] dark:placeholder:text-[#4a4536] outline-none shadow-inner transition-all" placeholder="Nhập Hán tự..." type="text"/>
+<!-- IME Helper Text -->
+<div class="absolute top-1/2 right-4 -translate-y-1/2 hidden md:flex flex-col items-center opacity-30 pointer-events-none">
+<span class="material-symbols-outlined">keyboard</span>
+</div>
+</div>
+<!-- Action Controls -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+<!-- Secondary Actions -->
+<div class="flex gap-3 order-2 sm:order-1">
+<button class="flex items-center gap-2 px-5 py-3 rounded-xl bg-background-light dark:bg-[#2a261a] border border-[#eaddc5] dark:border-[#443e2e] text-ink dark:text-[#e4e0d6] font-bold text-sm hover:bg-[#eae2cd] dark:hover:bg-[#363022] transition-colors group" title="Gợi ý (Ctrl+H)">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">lightbulb</span>
+<span class="hidden sm:inline">Gợi ý</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-3 rounded-xl bg-background-light dark:bg-[#2a261a] border border-[#eaddc5] dark:border-[#443e2e] text-ink-light dark:text-[#a19d95] font-bold text-sm hover:text-danger hover:bg-danger/10 hover:border-danger/30 transition-colors group" title="Bỏ qua (Ctrl+S)">
+<span class="material-symbols-outlined text-xl group-hover:text-danger transition-colors">fast_forward</span>
+<span class="hidden sm:inline">Bỏ qua</span>
+</button>
+</div>
+<!-- Primary Action -->
+<button class="order-1 sm:order-2 flex-1 sm:flex-none sm:min-w-[160px] h-14 bg-primary hover:bg-primary-hover text-ink font-extrabold text-lg rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center gap-2 transform active:scale-95 transition-all duration-150 relative overflow-hidden">
+<span class="relative z-10">TẤN CÔNG</span>
+<span class="material-symbols-outlined relative z-10 font-bold">swords</span>
+<!-- Button sheen effect -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full hover:animate-[shimmer_1s_infinite]"></div>
+</button>
+</div>
+<!-- Keyboard shortcuts hint -->
+<div class="mt-8 text-center text-xs font-medium text-[#a19d95] dark:text-[#6b665c] flex items-center justify-center gap-4">
+<span class="flex items-center gap-1"><kbd class="bg-white dark:bg-[#3a3525] px-1.5 py-0.5 rounded border border-[#eaddc5] dark:border-[#443e2e] font-sans">Enter</kbd> Kiểm tra</span>
+<span class="flex items-center gap-1"><kbd class="bg-white dark:bg-[#3a3525] px-1.5 py-0.5 rounded border border-[#eaddc5] dark:border-[#443e2e] font-sans">Ctrl</kbd> + <kbd class="bg-white dark:bg-[#3a3525] px-1.5 py-0.5 rounded border border-[#eaddc5] dark:border-[#443e2e] font-sans">H</kbd> Gợi ý</span>
+</div>
+</div>
+<!-- Right Side: The Arena Visual -->
+<div class="w-full lg:w-[45%] bg-[#fff9e6] dark:bg-[#1a1810] relative flex items-center justify-center overflow-hidden border-t lg:border-t-0 lg:border-l border-[#eaddc5] dark:border-[#3a3525]">
+<!-- Background Pattern -->
+<div class="absolute inset-0 bg-wuxia-pattern opacity-100 dark:opacity-5"></div>
+<!-- Atmospheric Radial Gradient -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#ffeeb5]/30 to-[#ffeeb5]/50 dark:from-transparent dark:via-[#2a261a]/50 dark:to-[#0f0e0a]"></div>
+<!-- "Sun" / Spotlight behind character -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 dark:bg-primary/10 rounded-full blur-3xl"></div>
+<!-- Mascot Image Container -->
+<div class="relative w-full h-[300px] lg:h-full min-h-[400px] flex items-end justify-center pb-0 lg:pb-10 mascot-float z-10">
+<!-- Image -->
+<img class="h-[85%] object-contain drop-shadow-2xl filter contrast-110 saturate-110" data-alt="Illustration of a cute cat wearing traditional Chinese martial arts robes, holding a bamboo stick in a combat stance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP1pYYN4FMB0bqyRPzHJWhxwL--42mwSWD5RrjsvfpirKP8h-P6wQCq5c4SUScNiCJHrX5cjeDAPwo0KOthr97n_gc3J8l3VY_HNZtCo6cLso36btDxxwUgakrNO0rOVvwhVOnsgQWDDDmbFvDWjaQAibW7nNT36EAJQkeKMpyWzDbJ6DHtT2nbTsTpljzfj1wGUin4Ot-m3FIiRl-pH5j1GRyzq_4JKVOXqDyZMsqyFqn2IJnndYTOn45HS-ePS9dJs1UWeNHOdo"/>
+<!-- Dialogue Bubble for Mascot -->
+<div class="absolute top-10 right-10 bg-white dark:bg-[#2a261a] text-ink dark:text-white p-3 rounded-2xl rounded-bl-none shadow-lg border border-[#eaddc5] dark:border-[#443e2e] max-w-[150px] animate-bounce duration-[2000ms]">
+<p class="text-xs font-bold text-center">"Chuẩn bị nghênh chiến!"</p> <!-- "Prepare for battle!" -->
+</div>
+</div>
+<!-- Foreground mist/clouds (CSS only) -->
+<div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#fff9e6] to-transparent dark:from-[#1a1810] z-20"></div>
+</div>
+</div>
+<!-- Footer / Streak Area -->
+<div class="mt-8 flex items-center gap-8 opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-[#ffede0] dark:bg-[#3d1f1f] rounded-lg text-[#ff6b00] dark:text-[#ff8a33]">
+<span class="material-symbols-outlined">local_fire_department</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-ink-light dark:text-[#a19d95] uppercase">Chuỗi thắng</span>
+<span class="text-lg font-bold text-ink dark:text-white">12</span>
+</div>
+</div>
+<div class="h-8 w-px bg-[#eaddc5] dark:bg-[#3a3525]"></div>
+<div class="flex items-center gap-2">
+<div class="p-2 bg-[#e0f2ff] dark:bg-[#1f2d3d] rounded-lg text-[#0091ff] dark:text-[#4daeff]">
+<span class="material-symbols-outlined">hotel_class</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-ink-light dark:text-[#a19d95] uppercase">Điểm số</span>
+<span class="text-lg font-bold text-ink dark:text-white">1,240</span>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple shim to satisfy the 'shimmer' animation class requirement without external CSS
+        document.head.insertAdjacentHTML("beforeend", `<style>
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+        </style>`)
+    </script>
+</body></html>

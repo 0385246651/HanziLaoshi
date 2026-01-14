@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin - Quản lý Từ vựng - Học Tiếng Trung</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffc629",
+                        "primary-content": "#422006",
+                        "secondary": "#3C8C70", // Jade Green
+                        "secondary-light": "#E0F2EB",
+                        "background-light": "#fcfbf8",
+                        "background-dark": "#1f1b13",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2d281e",
+                        "border-light": "#efeadd",
+                        "border-dark": "#4a4230",
+                        "text-main": "#1d180c",
+                        "text-muted": "#8c7e5e",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    backgroundImage: {
+                        'lattice-pattern': "radial-gradient(#dbcba8 1px, transparent 1px)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+        .lattice-bg {
+            background-size: 20px 20px;
+            opacity: 0.4;
+        }::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5dfd0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d1c7b0;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        .dark .glass-effect {
+            background: rgba(45, 40, 30, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-[#ece0c8] min-h-screen flex overflow-hidden">
+<aside class="w-72 hidden lg:flex flex-col h-screen border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark fixed left-0 top-0 z-20 transition-colors duration-300">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-primary-content text-3xl">pets</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-xl font-bold tracking-tight text-text-main dark:text-white">Wuxia Learn</h1>
+<p class="text-xs font-medium text-text-muted dark:text-gray-400">Admin Dashboard</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-gray-400 hover:bg-background-light dark:hover:bg-background-dark/50 hover:text-text-main dark:hover:text-white transition-all font-medium group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<span>Bảng điều khiển</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary-content dark:text-primary font-bold transition-all" href="#">
+<span class="material-symbols-outlined filled">menu_book</span>
+<span>Quản lý từ vựng</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-gray-400 hover:bg-background-light dark:hover:bg-background-dark/50 hover:text-text-main dark:hover:text-white transition-all font-medium group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">group</span>
+<span>Người dùng</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-gray-400 hover:bg-background-light dark:hover:bg-background-dark/50 hover:text-text-main dark:hover:text-white transition-all font-medium group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">bar_chart</span>
+<span>Thống kê</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-muted dark:text-gray-400 hover:bg-background-light dark:hover:bg-background-dark/50 hover:text-text-main dark:hover:text-white transition-all font-medium group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+<span>Cài đặt</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3 p-3 rounded-xl bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark mb-3">
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-white dark:border-gray-600 shadow-sm" data-alt="Portrait of the admin user" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGOuahNoHsWz8n4-Pdn3fJxTKdzRH1qI_VPOKv61axJkw7e91qtELe_sO_xszvkTZvSEWkxxlUOu-IDmcJM8cFx_wzlhWg-L_Ka1SysTYaYEHxzFkVEMOKtRZmndfR7T2CCel-1ufJdZXp_H9CAg4P-eYAudNfV-NQWRCBPrwoEgLZX4vOQAkfk0nJWHJI6g0VCuxbJsjOmVHya3vROrMMWRPoVyRbDBUSYJWes6t4iZ0ScZ8ttuYfTD6EGSvr_9bJfP51Hqcb5N0');"></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-sm font-bold text-text-main dark:text-white truncate">Nguyễn Admin</p>
+<p class="text-xs text-text-muted dark:text-gray-400 truncate">admin@wuxia.vn</p>
+</div>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-xl h-12 bg-surface-light dark:bg-surface-dark border-2 border-transparent hover:border-primary/20 text-text-main dark:text-white text-sm font-bold shadow-sm hover:shadow-md transition-all">
+<span class="material-symbols-outlined text-lg">logout</span>
+<span>Đăng xuất</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 lg:ml-72 h-screen overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<header class="sticky top-0 z-10 glass-effect border-b border-border-light/50 dark:border-border-dark/50 px-6 py-4 lg:px-10 lg:py-6 flex justify-between items-center">
+<div class="flex flex-col gap-1">
+<h2 class="text-2xl font-black text-text-main dark:text-white tracking-tight">Quản lý Từ vựng</h2>
+<p class="text-text-muted dark:text-gray-400 text-sm font-medium">Danh sách và công cụ quản lý dữ liệu HSK</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="size-10 rounded-full bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark flex items-center justify-center text-text-muted hover:text-primary transition-colors relative shadow-sm">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-white dark:border-surface-dark"></span>
+</button>
+</div>
+</header>
+<div class="p-6 lg:p-10 flex flex-col gap-8 max-w-[1400px] mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-light dark:bg-surface-dark p-6 rounded-2xl shadow-sm border border-border-light dark:border-border-dark">
+<div class="flex flex-col gap-1">
+<h3 class="font-bold text-lg text-text-main dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">table_view</span>
+                        Nhập liệu nhanh
+                    </h3>
+<p class="text-sm text-text-muted">Tải lên danh sách từ vựng từ file Excel để cập nhật hệ thống.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl shadow-lg shadow-green-600/20 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">upload_file</span>
+                        Nhập từ Excel
+                    </button>
+<button class="px-5 py-2.5 bg-primary hover:bg-yellow-400 text-primary-content font-bold rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">add</span>
+                        Thêm mới
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark flex items-center gap-4">
+<div class="size-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<div>
+<p class="text-xs text-text-muted font-bold uppercase">Tổng số từ</p>
+<p class="text-xl font-black text-text-main dark:text-white">5,320</p>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark flex items-center gap-4">
+<div class="size-12 rounded-lg bg-yellow-50 text-yellow-600 flex items-center justify-center">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div>
+<p class="text-xs text-text-muted font-bold uppercase">HSK 1-3</p>
+<p class="text-xl font-black text-text-main dark:text-white">1,250</p>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark flex items-center gap-4">
+<div class="size-12 rounded-lg bg-orange-50 text-orange-600 flex items-center justify-center">
+<span class="material-symbols-outlined">workspace_premium</span>
+</div>
+<div>
+<p class="text-xs text-text-muted font-bold uppercase">HSK 4-6</p>
+<p class="text-xl font-black text-text-main dark:text-white">4,070</p>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark flex items-center gap-4">
+<div class="size-12 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="text-xs text-text-muted font-bold uppercase">Cần xem xét</p>
+<p class="text-xl font-black text-text-main dark:text-white">12</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-sm border border-border-light dark:border-border-dark flex flex-col overflow-hidden">
+<div class="p-5 border-b border-border-light dark:border-border-dark flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="relative w-full sm:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-sm" placeholder="Tìm kiếm theo Hán tự, Pinyin, Nghĩa..." type="text"/>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<select class="px-3 py-2.5 rounded-xl bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-sm outline-none focus:border-primary">
+<option value="">Tất cả cấp độ</option>
+<option value="1">HSK 1</option>
+<option value="2">HSK 2</option>
+<option value="3">HSK 3</option>
+<option value="4">HSK 4</option>
+<option value="5">HSK 5</option>
+<option value="6">HSK 6</option>
+</select>
+<button class="p-2.5 rounded-xl border border-border-light dark:border-border-dark hover:bg-background-light dark:hover:bg-background-dark text-text-muted transition-colors">
+<span class="material-symbols-outlined text-xl">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-background-light dark:bg-background-dark/50 border-b border-border-light dark:border-border-dark">
+<th class="p-4 text-xs font-bold text-text-muted uppercase tracking-wider w-16">ID</th>
+<th class="p-4 text-xs font-bold text-text-muted uppercase tracking-wider">Hán tự</th>
+<th class="p-4 text-xs font-bold text-text-muted uppercase tracking-wider">Pinyin</th>
+<th class="p-4 text-xs font-bold text-text-muted uppercase tracking-wider">Nghĩa Tiếng Việt</th>
+<th class="p-4 text-xs font-bold text-text-muted uppercase tracking-wider">Cấp độ</th>
+<th class="p-4 text-xs font-bold text-text-muted uppercase tracking-wider text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light/50 dark:divide-border-dark/50">
+<tr class="group hover:bg-background-light dark:hover:bg-background-dark/30 transition-colors">
+<td class="p-4 text-sm text-text-muted">#1024</td>
+<td class="p-4">
+<span class="text-2xl font-serif text-text-main dark:text-white">爱</span>
+</td>
+<td class="p-4 text-sm font-medium text-text-main dark:text-white">ài</td>
+<td class="p-4 text-sm text-text-muted">Yêu, thích</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold border border-green-200">HSK 1</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Sửa">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors" title="Xóa">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-background-light dark:hover:bg-background-dark/30 transition-colors">
+<td class="p-4 text-sm text-text-muted">#1025</td>
+<td class="p-4">
+<span class="text-2xl font-serif text-text-main dark:text-white">八</span>
+</td>
+<td class="p-4 text-sm font-medium text-text-main dark:text-white">bā</td>
+<td class="p-4 text-sm text-text-muted">Tám (số 8)</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold border border-green-200">HSK 1</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Sửa">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors" title="Xóa">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-background-light dark:hover:bg-background-dark/30 transition-colors">
+<td class="p-4 text-sm text-text-muted">#1026</td>
+<td class="p-4">
+<span class="text-2xl font-serif text-text-main dark:text-white">爸爸</span>
+</td>
+<td class="p-4 text-sm font-medium text-text-main dark:text-white">bàba</td>
+<td class="p-4 text-sm text-text-muted">Bố, cha</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold border border-green-200">HSK 1</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Sửa">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors" title="Xóa">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-background-light dark:hover:bg-background-dark/30 transition-colors">
+<td class="p-4 text-sm text-text-muted">#1027</td>
+<td class="p-4">
+<span class="text-2xl font-serif text-text-main dark:text-white">不但...而且</span>
+</td>
+<td class="p-4 text-sm font-medium text-text-main dark:text-white">búdàn... érqiě</td>
+<td class="p-4 text-sm text-text-muted">Không những... mà còn</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-md bg-yellow-100 text-yellow-700 text-xs font-bold border border-yellow-200">HSK 3</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Sửa">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors" title="Xóa">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-background-light dark:hover:bg-background-dark/30 transition-colors">
+<td class="p-4 text-sm text-text-muted">#1028</td>
+<td class="p-4">
+<span class="text-2xl font-serif text-text-main dark:text-white">按时</span>
+</td>
+<td class="p-4 text-sm font-medium text-text-main dark:text-white">ànshí</td>
+<td class="p-4 text-sm text-text-muted">Đúng giờ, theo giờ</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-md bg-orange-100 text-orange-700 text-xs font-bold border border-orange-200">HSK 4</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Sửa">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors" title="Xóa">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-background-light dark:hover:bg-background-dark/30 transition-colors">
+<td class="p-4 text-sm text-text-muted">#1029</td>
+<td class="p-4">
+<span class="text-2xl font-serif text-text-main dark:text-white">安慰</span>
+</td>
+<td class="p-4 text-sm font-medium text-text-main dark:text-white">ānwèi</td>
+<td class="p-4 text-sm text-text-muted">An ủi, động viên</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded-md bg-red-100 text-red-700 text-xs font-bold border border-red-200">HSK 5</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors" title="Sửa">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors" title="Xóa">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border-light dark:border-border-dark flex items-center justify-between">
+<p class="text-sm text-text-muted">Hiển thị <span class="font-bold text-text-main dark:text-white">1</span> đến <span class="font-bold text-text-main dark:text-white">6</span> của <span class="font-bold text-text-main dark:text-white">5,320</span> kết quả</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded-lg border border-border-light dark:border-border-dark text-text-muted hover:bg-background-light dark:hover:bg-background-dark transition-colors disabled:opacity-50" disabled="">Trước</button>
+<button class="px-3 py-1 rounded-lg bg-primary text-primary-content font-bold">1</button>
+<button class="px-3 py-1 rounded-lg border border-border-light dark:border-border-dark text-text-muted hover:bg-background-light dark:hover:bg-background-dark transition-colors">2</button>
+<button class="px-3 py-1 rounded-lg border border-border-light dark:border-border-dark text-text-muted hover:bg-background-light dark:hover:bg-background-dark transition-colors">3</button>
+<span class="px-2 py-1 text-text-muted">...</span>
+<button class="px-3 py-1 rounded-lg border border-border-light dark:border-border-dark text-text-muted hover:bg-background-light dark:hover:bg-background-dark transition-colors">Tiếp</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

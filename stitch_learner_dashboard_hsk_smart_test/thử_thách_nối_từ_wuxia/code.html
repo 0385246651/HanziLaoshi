@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thử thách Nối từ Wuxia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;family=Ma+Shan+Zheng&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffd900",
+                        "primary-dark": "#e6c200",
+                        "background-light": "#fbf7ef",
+                        "background-dark": "#091a1a",
+                        "jade": "#36B37E",
+                        "crimson": "#E03636",
+                        "paper": "#f4f2e6",
+                        "ink": "#1d1a0c",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "Noto Sans", "sans-serif"],
+                        "chinese": ["Ma Shan Zheng", "cursive"], // Added for specific Wuxia flair
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    boxShadow: {
+                        'glow': '0 0 15px -3px rgba(255, 217, 0, 0.5)',
+                        'glow-jade': '0 0 15px -3px rgba(54, 179, 126, 0.5)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for wuxia feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fbf7ef; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dcd6c3; 
+            border-radius: 4px;
+        }
+        
+        /* Slash effect for matched cards */
+        .slashed-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 48%, rgba(255, 217, 0, 0.8) 49%, rgba(255, 255, 255, 1) 50%, rgba(255, 217, 0, 0.8) 51%, transparent 52%);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#e5e0cf 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .dark .bg-pattern {
+            background-image: radial-gradient(#1a2c2c 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-ink dark:text-gray-100 font-display transition-colors duration-200 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full border-b border-[#e6e2d6] dark:border-gray-800 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 md:px-8 py-4">
+<div class="flex items-center justify-between gap-4">
+<!-- Title & Level -->
+<div class="flex items-center gap-4 min-w-0">
+<div class="flex items-center justify-center size-10 rounded-xl bg-primary text-ink shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">swords</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-none truncate">Thử thách Nối từ</h1>
+<span class="text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">Cấp độ 1: Nhập môn</span>
+</div>
+</div>
+<!-- Progress Bar (Center) - Hidden on very small screens -->
+<div class="hidden md:flex flex-1 max-w-md flex-col gap-1.5 mx-4">
+<div class="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
+<span>Tiến độ</span>
+<span class="text-jade">20/100</span>
+</div>
+<div class="h-3 w-full bg-[#eae5cd] dark:bg-gray-800 rounded-full overflow-hidden relative shadow-inner">
+<div class="absolute top-0 left-0 h-full bg-primary rounded-full" style="width: 20%;">
+<div class="absolute right-0 top-0 bottom-0 w-2 bg-white/40 blur-[2px]"></div>
+</div>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-2">
+<button class="size-10 flex items-center justify-center rounded-xl bg-paper dark:bg-gray-800 hover:bg-[#eae5cd] dark:hover:bg-gray-700 transition-colors text-ink dark:text-gray-200">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+<button class="size-10 flex items-center justify-center rounded-xl bg-paper dark:bg-gray-800 hover:bg-[#eae5cd] dark:hover:bg-gray-700 transition-colors text-ink dark:text-gray-200">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="hidden sm:flex h-10 px-4 items-center justify-center rounded-xl bg-crimson/10 text-crimson hover:bg-crimson/20 transition-colors font-bold text-sm gap-2">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                        Thoát
+                    </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Game Area -->
+<main class="flex-grow flex flex-col items-center justify-center p-4 md:p-8 bg-pattern relative w-full max-w-7xl mx-auto">
+<!-- Ambient Background Elements (Decorative) -->
+<div class="absolute top-20 left-10 opacity-10 pointer-events-none select-none">
+<span class="font-chinese text-9xl text-ink dark:text-white rotate-[-15deg] block">武</span>
+</div>
+<div class="absolute bottom-20 right-10 opacity-10 pointer-events-none select-none">
+<span class="font-chinese text-9xl text-ink dark:text-white rotate-[15deg] block">侠</span>
+</div>
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10 h-full min-h-[600px]">
+<!-- Left Sidebar: HUD & Mascot -->
+<aside class="col-span-12 lg:col-span-3 flex flex-col gap-6 order-2 lg:order-1">
+<!-- HUD Cards -->
+<div class="grid grid-cols-2 lg:grid-cols-1 gap-4">
+<!-- Timer -->
+<div class="bg-paper dark:bg-gray-800 rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-[#e6e2d6] dark:border-gray-700 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl">timer</span>
+</div>
+<span class="text-xs uppercase tracking-widest text-gray-500 font-bold mb-1">Thời gian</span>
+<div class="text-3xl font-display font-bold text-ink dark:text-white tabular-nums">02:45</div>
+</div>
+<!-- Score & Combo -->
+<div class="bg-paper dark:bg-gray-800 rounded-2xl p-4 flex flex-col shadow-sm border border-[#e6e2d6] dark:border-gray-700">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs uppercase tracking-widest text-gray-500 font-bold">Điểm số</span>
+<span class="text-jade font-bold flex items-center gap-1 text-sm bg-jade/10 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                                +20
+                            </span>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-bold text-ink dark:text-white">150</span>
+<div class="mb-1.5 flex items-center text-primary font-bold text-lg animate-pulse">
+<span class="material-symbols-outlined text-xl mr-1">bolt</span>
+                                x3 Combo
+                            </div>
+</div>
+</div>
+</div>
+<!-- Mascot Area -->
+<div class="flex-grow flex flex-col items-center justify-end relative mt-4 lg:mt-0">
+<!-- Speech Bubble -->
+<div class="bg-white dark:bg-gray-800 text-ink dark:text-white p-4 rounded-2xl rounded-bl-none shadow-lg border-2 border-primary mb-4 relative max-w-[240px] animate-[bounce_3s_infinite]">
+<p class="font-medium text-sm">"Đại hiệp, hãy quan sát kỹ các nét chữ!"</p>
+</div>
+<!-- Mascot Image -->
+<div class="relative w-48 h-48 lg:w-64 lg:h-64 filter drop-shadow-xl transition-transform hover:scale-105 duration-300 cursor-pointer" title="Wuxia Cat Mascot">
+<img alt="Wuxia Cat Mascot" class="w-full h-full object-cover rounded-3xl mask-image-gradient" data-alt="Illustration of a cute cat dressed in traditional martial arts robes holding a small wooden sword, standing in a heroic pose." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3RhiT8KvJHpm8323CNuzPoBP2RRyfTEJH1WI26kAUZ6Eq7WdsejyuHeTpMB-l1COpCPWemf--jx5hxLFEoFa4RIh8iPihRtWFtduU7WhOmm670daKRNtmpAZrEBhO1c_zf4feX1btjNd5cMCKKsNEU1lFKQ-5lHyjlepH4lTywZt-caluqUwqNZZ0GFt7UtvfWL0KQ6aZMM1B-CsMf8iZ2VsMCC5qc9E7Ar0Zudbzxfu59xqaaPIwoLIUF2zO_aSQRgzJn5Hc1ho" style="-webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%); mask-image: radial-gradient(circle at center, black 60%, transparent 100%);"/>
+<!-- Floating particles/effects behind mascot -->
+<div class="absolute -z-10 top-10 left-10 right-10 bottom-10 bg-primary/30 blur-[40px] rounded-full"></div>
+</div>
+</div>
+</aside>
+<!-- Center: The Arena (Matching Board) -->
+<section class="col-span-12 lg:col-span-9 relative order-1 lg:order-2 flex flex-col h-full">
+<!-- Hint Button (Floating top right of arena) -->
+<div class="absolute -top-12 lg:top-0 right-0 z-20">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-full shadow-sm border border-crimson/20 text-crimson hover:bg-crimson hover:text-white transition-all group">
+<span class="material-symbols-outlined text-lg group-hover:animate-ping">lightbulb</span>
+<span class="text-sm font-bold">Gợi ý (50 vàng)</span>
+</button>
+</div>
+<!-- Game Board Container -->
+<div class="relative flex-grow flex justify-between items-stretch gap-8 lg:gap-24 py-4 px-2 lg:px-12 select-none">
+<!-- SVG Overlay for Connecting Lines -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="grad-gold" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#ffd900;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#ffaa00;stop-opacity:1"></stop>
+</lineargradient>
+<filter id="glow">
+<fegaussianblur result="coloredBlur" stddeviation="3.5"></fegaussianblur>
+<femerge>
+<femergenode in="coloredBlur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<!-- Example Active Line (Simulated Interaction) -->
+<path class="opacity-0 lg:opacity-100 animate-[pulse_2s_infinite]" d="M 280 180 C 400 180, 500 350, 650 350" fill="none" filter="url(#glow)" stroke="url(#grad-gold)" stroke-linecap="round" stroke-width="6"></path>
+<!-- Connection Points (Dots) -->
+<circle class="opacity-0 lg:opacity-100" cx="280" cy="180" fill="#ffd900" r="6"></circle>
+<circle class="opacity-0 lg:opacity-100" cx="650" cy="350" fill="#ffd900" r="6"></circle>
+</svg>
+<!-- Left Column: Hanzi -->
+<div class="flex-1 flex flex-col justify-center gap-6 z-20">
+<!-- Card 1: Completed -->
+<div class="relative h-24 bg-[#eafff5] dark:bg-jade/10 border-2 border-jade rounded-2xl flex items-center justify-center cursor-default shadow-sm opacity-60 slashed-card">
+<span class="text-4xl font-chinese text-jade dark:text-jade font-bold">朋友</span>
+<div class="absolute -right-3 bg-jade text-white rounded-full p-1 shadow-md">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<!-- Card 2: Active (Selected) -->
+<div class="relative h-24 bg-white dark:bg-gray-800 border-2 border-primary shadow-glow transform scale-105 transition-all duration-300 rounded-2xl flex items-center justify-center cursor-pointer">
+<span class="text-4xl font-chinese text-ink dark:text-white font-bold">老师</span>
+<!-- Drag Handle / Connection Point Visual -->
+<div class="absolute -right-1.5 w-3 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+<div class="w-1 h-8 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+</div>
+</div>
+<!-- Card 3: Neutral -->
+<div class="relative h-24 bg-white dark:bg-gray-800 border-2 border-transparent hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 rounded-2xl flex items-center justify-center cursor-pointer group">
+<span class="text-4xl font-chinese text-ink dark:text-white font-bold group-hover:scale-110 transition-transform">学校</span>
+</div>
+<!-- Card 4: Neutral -->
+<div class="relative h-24 bg-white dark:bg-gray-800 border-2 border-transparent hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 rounded-2xl flex items-center justify-center cursor-pointer group">
+<span class="text-4xl font-chinese text-ink dark:text-white font-bold group-hover:scale-110 transition-transform">猫</span>
+</div>
+</div>
+<!-- Right Column: Vietnamese Meanings (Scrambled) -->
+<div class="flex-1 flex flex-col justify-center gap-6 z-20">
+<!-- Match for Card 4 -->
+<div class="relative h-24 bg-white dark:bg-gray-800 border-2 border-transparent hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 rounded-2xl flex items-center justify-center cursor-pointer text-center px-4 group">
+<span class="text-lg font-medium text-ink dark:text-gray-200 group-hover:text-primary-dark transition-colors">Con mèo</span>
+</div>
+<!-- Match for Card 1 (Completed) -->
+<div class="relative h-24 bg-[#eafff5] dark:bg-jade/10 border-2 border-jade rounded-2xl flex items-center justify-center cursor-default shadow-sm opacity-60 slashed-card text-center px-4">
+<span class="text-lg font-medium text-jade decoration-jade line-through decoration-2">Bạn bè</span>
+<div class="absolute -left-3 bg-jade text-white rounded-full p-1 shadow-md">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<!-- Match for Card 3 -->
+<div class="relative h-24 bg-white dark:bg-gray-800 border-2 border-transparent hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 rounded-2xl flex items-center justify-center cursor-pointer text-center px-4 group">
+<span class="text-lg font-medium text-ink dark:text-gray-200 group-hover:text-primary-dark transition-colors">Trường học</span>
+</div>
+<!-- Match for Card 2 (Target for Active) -->
+<div class="relative h-24 bg-white dark:bg-gray-800 border-2 border-primary/50 shadow-[0_0_15px_-3px_rgba(255,217,0,0.3)] hover:shadow-glow transition-all duration-200 rounded-2xl flex items-center justify-center cursor-pointer text-center px-4">
+<span class="text-lg font-medium text-ink dark:text-gray-200">Giáo viên</span>
+<!-- Drag Handle / Connection Point Visual -->
+<div class="absolute -left-1.5 w-3 h-12 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+<div class="w-1 h-8 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Status Message -->
+<div class="mt-4 text-center">
+<p class="text-gray-500 dark:text-gray-400 text-sm">Giữ và kéo từ thẻ <span class="font-bold text-ink dark:text-gray-200">Tiếng Trung</span> sang nghĩa <span class="font-bold text-ink dark:text-gray-200">Tiếng Việt</span></p>
+</div>
+</section>
+</div>
+</main>
+</body></html>

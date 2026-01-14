@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng nhập - HSK Smart Test</title>
+<!-- Fonts and Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ffd900",
+                        "primary-hover": "#e6c300",
+                        "background-light": "#fcfbf8",
+                        "background-dark": "#16181d",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#23262f",
+                        "text-main": "#1d1a0c",
+                        "text-secondary": "#636054",
+                        "border-color": "#eae5cd",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "Noto Sans", "sans-serif"],
+                        "body": ["Spline Sans", "Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(29, 26, 12, 0.05)',
+                        'card': '0 10px 40px -10px rgba(29, 26, 12, 0.08)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>/* Custom scrollbar to match theme */
+::-webkit-scrollbar {
+    width: 8px
+    }
+::-webkit-scrollbar-track {
+    background: #f1f1f1
+    }
+::-webkit-scrollbar-thumb {
+    background: #dcd6bc;
+    border-radius: 4px
+    }
+/* Ink wash subtle texture overlay */
+.ink-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB81jT0XA2Iq_Si7jWIQVgPwbZ-D_UKxAEd8NpwUXKibU42gwA1LgvP_ZEoPVXc488wdl_YNEu5Fydzf3z7YnaWsv1LipauRDbAyfEzC4dAXvI3mEEfuRf8_k1P9vnCaJOzo69NSWPoJFbvGoN4fxA-t05yt46FhqQ71QExCsaGfH2ofLUB91CpqO3wBvDC7nfwAsizNF4q7ZxbxRT7uMSx1pKZx-naJtAGTvIoX-lXgmYmmUDO7WcBqpBoELpbeKD28W3LAqqU8r0)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main font-display antialiased ink-texture">
+<div class="min-h-screen w-full flex flex-row overflow-hidden relative">
+<!-- Left Side: Neo-Wuxia Illustration Zone -->
+<div class="hidden lg:flex lg:w-7/12 xl:w-1/2 relative bg-[#fdfaf0] dark:bg-[#1a1c23] flex-col justify-between overflow-hidden">
+<!-- Abstract background shapes representing mountains/clouds -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#a19345] blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[#d4c575] blur-[100px]"></div>
+</div>
+<!-- Content Container -->
+<div class="relative z-10 flex flex-col h-full p-12 justify-center items-center text-center">
+<!-- Mascot Illustration Placeholder -->
+<div class="relative w-full max-w-[500px] aspect-[4/5] mx-auto mb-8 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.01] transition-transform duration-500 bg-center bg-cover bg-no-repeat" data-alt="Illustration of a stylized cat mascot in traditional Hanfu robes holding a scroll, standing on a misty mountain peak, neo-traditional ink wash style" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC55-ZXRAg2VdNMgdN-wBv7IlegNROv-6tY4njfuBSlVNStLpw8EGG5tyPdgE2tBD4yayJ0K-QRo0T1JERiKyrArBlt7OxyaiZh7EcIrtYIE3MLdRb8GaheF8I2odfLFUg_0pwkczPooWln9d_bh4vQbbn1DO85wHh8y7A06Ia5ZCYeDZ3Fl7NohHOhShF115GkX7j-mI7yNTHKm4REWRseq6Eg9kmtnVdTdMODYnoYZrLAX_bziupZyIy_ljb9CzjZBxkpCfB99KI');">
+<!-- Overlay Gradient for text readability if needed -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<!-- Text overlay integrated into illustration -->
+<div class="absolute bottom-10 left-0 right-0 text-white px-6">
+<h2 class="text-3xl font-bold mb-2 tracking-tight">学无止境</h2>
+<p class="text-white/90 text-lg font-light">"Học tập không có điểm dừng"</p>
+</div>
+</div>
+<div class="max-w-md mx-auto space-y-4">
+<h1 class="text-3xl font-bold text-[#1d1a0c] dark:text-white">Chào mừng Đại hiệp trở lại!</h1>
+<p class="text-[#636054] dark:text-gray-400 text-lg">Tiếp tục hành trình tu luyện HSK mỗi ngày để đạt cảnh giới cao nhất.</p>
+</div>
+</div>
+<!-- Decorative pattern bottom -->
+<div class="absolute bottom-0 left-0 w-full h-24 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="flex-1 flex flex-col items-center justify-center p-6 lg:p-12 relative z-10">
+<!-- Mobile Header (Logo visible only on mobile/tablet here or integrated) -->
+<div class="absolute top-6 left-6 lg:hidden">
+<div class="flex items-center gap-2 text-[#1d1a0c] dark:text-white">
+<span class="material-symbols-outlined text-3xl text-primary">school</span>
+<span class="font-bold text-xl">HSK Smart Test</span>
+</div>
+</div>
+<div class="w-full max-w-[420px] bg-surface-light dark:bg-surface-dark rounded-2xl shadow-card p-8 lg:p-10 border border-white/50 dark:border-white/5 backdrop-blur-sm">
+<!-- Form Header -->
+<div class="flex flex-col items-center mb-8 text-center">
+<div class="flex items-center justify-center w-12 h-12 bg-primary/20 rounded-xl mb-4 text-primary dark:text-yellow-400">
+<span class="material-symbols-outlined text-[28px]">lock_open</span>
+</div>
+<h2 class="text-2xl font-bold text-text-main dark:text-white mb-2">Đăng nhập</h2>
+<p class="text-text-secondary dark:text-gray-400 text-sm">Điền thông tin để truy cập kho báu kiến thức</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-5" onsubmit="event.preventDefault()">
+<!-- Username/Email Field -->
+<div class="space-y-1.5">
+<label class="block text-sm font-medium text-text-main dark:text-gray-200" for="username">Email hoặc Tên đăng nhập</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border border-border-color dark:border-gray-700 rounded-xl bg-[#fcfbf8] dark:bg-[#16181d] text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm" id="username" name="username" placeholder="Ví dụ: hocvien@hsk.com" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-baseline">
+<label class="block text-sm font-medium text-text-main dark:text-gray-200" for="password">Mật khẩu</label>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">key</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-3 border border-border-color dark:border-gray-700 rounded-xl bg-[#fcfbf8] dark:bg-[#16181d] text-text-main dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember & Forgot Password -->
+<div class="flex items-center justify-between text-sm">
+<label class="flex items-center gap-2 cursor-pointer group">
+<div class="relative flex items-center">
+<input class="peer h-4 w-4 cursor-pointer appearance-none rounded border border-gray-300 bg-white checked:border-primary checked:bg-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-1" type="checkbox"/>
+<span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-black opacity-0 peer-checked:opacity-100 pointer-events-none">
+<svg class="h-3 w-3" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+</span>
+</div>
+<span class="text-text-secondary dark:text-gray-400 group-hover:text-text-main dark:group-hover:text-gray-200 transition-colors">Ghi nhớ tôi</span>
+</label>
+<a class="font-semibold text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300 transition-colors" href="#">Quên mật khẩu?</a>
+</div>
+<!-- Main Button -->
+<button class="w-full flex items-center justify-center py-3 px-4 rounded-xl text-text-main font-bold bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-[0_4px_14px_0_rgba(255,217,0,0.39)] transition-all transform active:scale-[0.98]" type="submit">
+                        Đăng nhập
+                        <span class="material-symbols-outlined ml-2 text-[20px]">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative my-8">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-4 bg-surface-light dark:bg-surface-dark text-gray-500 dark:text-gray-400">Hoặc đăng nhập với</span>
+</div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#2a2d36] hover:bg-gray-50 dark:hover:bg-[#323640] transition-colors group">
+<img alt="Google" class="h-5 w-5 mr-2" data-alt="Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuvFZOSnLCsWOHWQJLxAF5Q9royChx8o-9do6pItccMkc13D_O2gJLhUG0XmCtes51Dk9xaQSwu-c91GXkS-S_1S1m7L5deACbY9ElTTiDVy1QQuWAorpTEmYfh9y-kBD3CT1Vqb-P5tdm0o2ZcomoATwjfm3_3TJmVJwYif56AkbT4xxP1EKG5kHdlC_fZB2W9uXYe_57pZoPLtlzGPngcwYPSvjpUYtBVRCpyCN-4QSAhhTIEAGasJ5acgSMJPxOwuB5QvuuGlg"/>
+<span class="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Google</span>
+</button>
+<button class="flex items-center justify-center px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-[#2a2d36] hover:bg-gray-50 dark:hover:bg-[#323640] transition-colors group">
+<img alt="Facebook" class="h-5 w-5 mr-2" data-alt="Facebook logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyjDuUkJdgE3hFriTjBCMUhQN1-Jq9B09yDdfv43pC45cUOhM1c6BPu7nqgf4UDbYA_FNI-C_TkLQqhQnnoBwvQ_cN-V8wCRjK9VB2CNNvI_Nvr-vEvwqSd1x28EzW9aFtfOkaW8-AYuGrqhRD-JMDIIIXIGlf1cXekn2FfedX-Ptxvq161WBQQXlAD_Gb7O8cxddcb-pqGHWolzNg1hE1w6Bz0YSAbAJUGB4xBbPiriuVmL32XtSD_uzvo1iSkTTAsL4DNjiEbOQ"/>
+<span class="text-sm font-medium text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white">Facebook</span>
+</button>
+</div>
+<!-- Footer Link -->
+<div class="mt-8 text-center">
+<p class="text-sm text-text-secondary dark:text-gray-400">
+                        Chưa có tài khoản? 
+                        <a class="font-bold text-text-main dark:text-white hover:text-primary dark:hover:text-primary underline decoration-primary/50 decoration-2 underline-offset-2 transition-colors" href="#">Đăng ký ngay</a>
+</p>
+</div>
+</div>
+<!-- Bottom decorative element -->
+<div class="mt-8 text-xs text-gray-400 dark:text-gray-600 text-center">
+                © 2024 HSK Smart Test. Bản quyền được bảo lưu.
+            </div>
+</div>
+</div>
+</body></html>

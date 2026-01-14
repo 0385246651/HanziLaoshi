@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HSK Admin - Quản lý Người dùng</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#277e9b",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#131c1f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1c262b",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 transition-colors duration-300">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden w-72 flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark md:flex transition-colors duration-300">
+<div class="flex h-20 items-center gap-3 px-8 border-b border-border-light dark:border-border-dark">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">school</span>
+</div>
+<div class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
+                    HSK Master
+                </div>
+</div>
+<div class="flex flex-1 flex-col overflow-y-auto px-4 py-6 gap-2">
+<p class="px-4 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Menu chính</p>
+<a class="group flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Tổng quan</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg bg-primary/10 px-4 py-3 text-primary dark:text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-bold">Người dùng</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">local_library</span>
+<span class="font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Khóa học</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">quiz</span>
+<span class="font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Bài kiểm tra</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="font-medium group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Cài đặt</span>
+</a>
+</div>
+<div class="border-t border-border-light dark:border-border-dark p-4">
+<div class="flex items-center gap-3 rounded-xl bg-slate-50 dark:bg-slate-800 p-3 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+<div class="h-10 w-10 shrink-0 rounded-full bg-cover bg-center" data-alt="Portrait of admin user" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCG_GQWCBd1sZX-wwXgTfcjbAQZKN44oa6BPplkv8rhNvQfg5djaZTZybZzvJpjIYcvveXn2rSQyWJptXWtc8NYHxwfFSn061wC4Zf6DV-VDB54oAHcSuosG7kqn6jOqBY9P-Ht4obfd673XOFxF-ilTvEdbEp6AzDRSxRGAD_I5-nN9AVtba-Wvg0mPTg80eusNFGzNXMOi1OVn7ppQ9e8qW8lSJ8TkLmAMYOKYCSTT3KQhlbrQR3H0UhF463lyl5-3zKLy6uLR-g');"></div>
+<div class="flex flex-col overflow-hidden">
+<span class="truncate text-sm font-bold text-slate-900 dark:text-white">Admin Minh</span>
+<span class="truncate text-xs text-slate-500">minh@hskmaster.vn</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-slate-400">expand_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex flex-1 flex-col overflow-hidden relative">
+<!-- Mobile Header -->
+<header class="flex h-16 items-center justify-between border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 md:hidden">
+<div class="flex items-center gap-3">
+<button class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-bold text-lg text-slate-900 dark:text-white">HSK Master</span>
+</div>
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Portrait of admin user" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAK7tJ9s67GmWaHN-MqvMUfEVZvcMCAg-9og-5JFwvNxfUb9cDTv6GqCarKyWYmHpOUjKUfVgLZ5Iqs16zqNzusgRw6Ot4-hmfFxJOG9gKN445DOmiiSBvprGPgi1-9MvVjFVawYTTnn2yuZnqs6plqtWkQ3Fn98lwVHHIxXVhAgAqXHdH089LRlLdFzgogxXC-bZNsyRmEottaUzJvGyieWmLf0NNstqm3a_dbUQR1iAxn-DpZ8VAflu01HzXEGlCpoObXOj6mfO8');"></div>
+</header>
+<div class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-10 scrollbar-hide">
+<div class="mx-auto max-w-7xl flex flex-col gap-8">
+<!-- Breadcrumbs & Header -->
+<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+<div class="flex flex-col gap-2">
+<nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Trang chủ</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="font-semibold text-slate-900 dark:text-white">Người dùng</span>
+</nav>
+<h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white md:text-4xl">Quản lý Người dùng</h1>
+<p class="text-slate-500 dark:text-slate-400 max-w-2xl">Danh sách tất cả học viên đang học HSK. Theo dõi tiến độ và quản lý tài khoản.</p>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg shadow-primary/30 transition-all hover:bg-primary/90 hover:-translate-y-0.5 active:translate-y-0">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Thêm học viên mới</span>
+</button>
+</div>
+<!-- Filters & Search -->
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-12">
+<div class="lg:col-span-5">
+<div class="relative group">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="block w-full rounded-lg border-0 bg-surface-light dark:bg-surface-dark py-3 pl-10 pr-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-border-light dark:ring-border-dark placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition-shadow" placeholder="Tìm kiếm theo tên hoặc email..." type="text"/>
+</div>
+</div>
+<div class="flex flex-wrap gap-4 lg:col-span-7 lg:justify-end">
+<!-- HSK Level Filter -->
+<div class="relative min-w-[160px]">
+<select class="block w-full appearance-none rounded-lg border-0 bg-surface-light dark:bg-surface-dark py-3 pl-3 pr-10 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-border-light dark:ring-border-dark focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 cursor-pointer">
+<option>Tất cả cấp độ HSK</option>
+<option>HSK 1 - Sơ cấp</option>
+<option>HSK 2 - Sơ cấp</option>
+<option>HSK 3 - Trung cấp</option>
+<option>HSK 4 - Trung cấp</option>
+<option>HSK 5 - Cao cấp</option>
+<option>HSK 6 - Cao cấp</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<!-- Status Filter -->
+<div class="relative min-w-[160px]">
+<select class="block w-full appearance-none rounded-lg border-0 bg-surface-light dark:bg-surface-dark py-3 pl-3 pr-10 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-border-light dark:ring-border-dark focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 cursor-pointer">
+<option>Tất cả trạng thái</option>
+<option>Hoạt động</option>
+<option>Đã khóa</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm">
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-border-light dark:divide-border-dark">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="py-3.5 pl-4 pr-3 text-left text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 sm:pl-6" scope="col">Học viên</th>
+<th class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 hidden sm:table-cell" scope="col">Cấp độ HSK</th>
+<th class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 hidden md:table-cell" scope="col">Ngày tham gia</th>
+<th class="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400" scope="col">Trạng thái</th>
+<th class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400" scope="col">Hành động</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark bg-surface-light dark:bg-surface-dark">
+<!-- Row 1 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
+<div class="flex items-center">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-cover bg-center" data-alt="Portrait of student Nguyen Thi Hoa" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAT4ZsMK0HFgZHyMrlaANeiZ0gdGBGPmYQde0rmwUgrweq9kwwPRoJpmhTJ3AGXP4ifOgpyT6A2lxcACGlvHzkrUHIfK-5fF29qarAwJ83uaebvo8rYECIQI-Yskfo9pMYRdB8pGSCLj4ABNrPueqZa5zJ4bEYTJ9CjDbJIrnKo2Z-Pv_M_i2N38whKygu3wPWuMdlrZ5pkGu-fChGxUg1ZqfT_6ElfheZEYQXcZX-mOf3xl1EBDqVaY8EFJeLklYtFUCbDKy-qRww');"></div>
+<div class="ml-4">
+<div class="font-bold text-slate-900 dark:text-white">Nguyễn Thị Hoa</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">hoanguyen@example.com</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-400/20">
+<span class="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400"></span>
+                                                HSK 3
+                                            </span>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500 dark:text-slate-400 hidden md:table-cell">
+                                            20/10/2023
+                                        </td>
+<td class="whitespace-nowrap px-3 py-4 text-sm">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20 dark:ring-green-500/30">
+                                                Hoạt động
+                                            </span>
+</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors" title="Xem tiến độ">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors" title="Đặt lại mật khẩu">
+<span class="material-symbols-outlined">lock_reset</span>
+</button>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
+<div class="flex items-center">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-cover bg-center" data-alt="Portrait of student Tran Van Binh" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA575G_nyCifJrRaUr-gfN6G704FvT-ZeJruqx76EVXp-FzoDxQmUgpu1wSN4er1gOME2vnRz_gtULxAsCBCRRNGfVdstBbwfXd87NHKlBryFzZcHGTXFG33XDP8prt53O3Ff4VDaAdDTbLiNx_Kow2qMXW6pMWMgJriXPKri4nFekT3TUatcyb_hvogiFlOvyLwTv5DeaEQra2vXBB6D78N81wBJ6tHB0HRoQ1SpdetsAN3rPxybh5OclJgSd_Xzj2dy8xO1lAGDM');"></div>
+<div class="ml-4">
+<div class="font-bold text-slate-900 dark:text-white">Trần Văn Bình</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">binhtran@example.com</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 dark:bg-indigo-900/30 px-2.5 py-0.5 text-xs font-medium text-indigo-700 dark:text-indigo-300 ring-1 ring-inset ring-indigo-700/10 dark:ring-indigo-400/20">
+<span class="h-1.5 w-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+                                                HSK 5
+                                            </span>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500 dark:text-slate-400 hidden md:table-cell">
+                                            15/09/2023
+                                        </td>
+<td class="whitespace-nowrap px-3 py-4 text-sm">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20 dark:ring-green-500/30">
+                                                Hoạt động
+                                            </span>
+</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors" title="Xem tiến độ">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors" title="Đặt lại mật khẩu">
+<span class="material-symbols-outlined">lock_reset</span>
+</button>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 (Locked) -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-slate-50/50 dark:bg-slate-800/20">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
+<div class="flex items-center">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold">L</div>
+<div class="ml-4">
+<div class="font-bold text-slate-500 dark:text-slate-400">Lê Thị Cẩm</div>
+<div class="text-sm text-slate-400">camle@example.com</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 dark:bg-teal-900/30 px-2.5 py-0.5 text-xs font-medium text-teal-700 dark:text-teal-300 ring-1 ring-inset ring-teal-700/10 dark:ring-teal-400/20">
+<span class="h-1.5 w-1.5 rounded-full bg-teal-600 dark:bg-teal-400"></span>
+                                                HSK 2
+                                            </span>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500 dark:text-slate-400 hidden md:table-cell">
+                                            01/11/2023
+                                        </td>
+<td class="whitespace-nowrap px-3 py-4 text-sm">
+<span class="inline-flex items-center rounded-md bg-slate-100 dark:bg-slate-700 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-300 ring-1 ring-inset ring-slate-500/10">
+                                                Đã khóa
+                                            </span>
+</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors" title="Mở khóa">
+<span class="material-symbols-outlined">lock_open</span>
+</button>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
+<div class="flex items-center">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-cover bg-center" data-alt="Portrait of student Pham Minh Duc" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBlHVbuCmKhR5zCvMRx9ZM6p9JckiJe7DFq2fhi-MbqB1bWa1bP-UxYDGwT4Dmveoa0kXg1o9FSGfPiZQHKB-B6rFo7crv_KnwgatDSjvTqUgbG24FpgO4vunMj5Pid0-NYHrLb-hKA9pv54e_VlLvXYoNoto56_AVtI8V3SGI8hasYswZJjGfmlZ3M5by2td9aaxvBzO2BVTIdHobwyH_UqQSUuHyVeSsAleqOjxHvI7HSfVZDHryi7kNen3Y4n8nhVMJHkU0aoQ0');"></div>
+<div class="ml-4">
+<div class="font-bold text-slate-900 dark:text-white">Phạm Minh Đức</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">ducpham@example.com</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-teal-50 dark:bg-teal-900/30 px-2.5 py-0.5 text-xs font-medium text-teal-700 dark:text-teal-300 ring-1 ring-inset ring-teal-700/10 dark:ring-teal-400/20">
+<span class="h-1.5 w-1.5 rounded-full bg-teal-600 dark:bg-teal-400"></span>
+                                                HSK 1
+                                            </span>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500 dark:text-slate-400 hidden md:table-cell">
+                                            05/12/2023
+                                        </td>
+<td class="whitespace-nowrap px-3 py-4 text-sm">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20 dark:ring-green-500/30">
+                                                Hoạt động
+                                            </span>
+</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors" title="Xem tiến độ">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors" title="Đặt lại mật khẩu">
+<span class="material-symbols-outlined">lock_reset</span>
+</button>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
+<div class="flex items-center">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-cover bg-center" data-alt="Portrait of student Nguyen Thu Ha" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU9RN0jCnxRp5IioJEv8PYpxA7duvBRuJTO4Z6vpftFd6HUfwb5JZSyIbDmOueN48TAPwiSTt_P8Kr3eup87fmC-VK-dpNYzNCUFCVHE3ypZam3knBbsnoZyj4BYSxQmMldi5qUIFJU6UFDpYRsr7_SWhMaYXXuajkbOwNoRCC9a_PMwTNEJmW6Iinb1xir-QRJn6Pnj3Ste6TuK-uiMa8tlMUjDImh6wtQ5uZDEvysxIC-mJYYXIdmEAoVh1Teo8aU7rYYV2FBB8');"></div>
+<div class="ml-4">
+<div class="font-bold text-slate-900 dark:text-white">Nguyễn Thu Hà</div>
+<div class="text-sm text-slate-500 dark:text-slate-400">hanguyen@example.com</div>
+</div>
+</div>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 px-2.5 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-400/20">
+<span class="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400"></span>
+                                                HSK 4
+                                            </span>
+</td>
+<td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500 dark:text-slate-400 hidden md:table-cell">
+                                            12/08/2023
+                                        </td>
+<td class="whitespace-nowrap px-3 py-4 text-sm">
+<span class="inline-flex items-center rounded-md bg-green-50 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20 dark:ring-green-500/30">
+                                                Hoạt động
+                                            </span>
+</td>
+<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-slate-400 hover:text-primary transition-colors" title="Xem tiến độ">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors" title="Đặt lại mật khẩu">
+<span class="material-symbols-outlined">lock_reset</span>
+</button>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 py-3 sm:px-6">
+<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-slate-700 dark:text-slate-400">
+                                            Hiển thị <span class="font-medium text-slate-900 dark:text-white">1</span> đến <span class="font-medium text-slate-900 dark:text-white">5</span> trong tổng số <span class="font-medium text-slate-900 dark:text-white">97</span> học viên
+                                        </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-border-light dark:ring-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-border-light dark:ring-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">2</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-border-light dark:ring-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">3</a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-400 ring-1 ring-inset ring-border-light dark:ring-border-dark focus:outline-offset-0">...</span>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-border-light dark:ring-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">10</a>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-border-light dark:ring-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Mobile Pagination View -->
+<div class="flex flex-1 justify-between sm:hidden">
+<a class="relative inline-flex items-center rounded-md border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">Trước</a>
+<a class="relative ml-3 inline-flex items-center rounded-md border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">Sau</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
