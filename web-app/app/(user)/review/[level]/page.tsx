@@ -162,7 +162,7 @@ export default function BattleModePage() {
           isProcessing.current = false
         } else {
           setGameState("victory")
-          confetti({ multipart: true })
+          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } })
         }
       }, 600)
     } else {
