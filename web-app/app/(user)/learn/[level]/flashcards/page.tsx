@@ -40,6 +40,7 @@ export default async function FlashcardsPage({
         hskLevel={level}
         currentPage={page}
         totalPages={totalPages}
+        totalItems={total}
       />
     </div>
   )

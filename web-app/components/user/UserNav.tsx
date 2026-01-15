@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User, Settings, Gamepad2, GraduationCap, BookOpen, Crown, LayoutDashboard } from "lucide-react";
+import { LogOut, User, Settings, Gamepad2, GraduationCap, BookOpen, Crown, LayoutDashboard, Menu } from "lucide-react";
 import { signOut } from "@/app/(auth)/login/actions"
 
 export function UserNav({ user, role }: { user: any, role?: string }) {
@@ -34,12 +34,39 @@ export function UserNav({ user, role }: { user: any, role?: string }) {
           <img src="/teacher-cat.png" alt="Dung Laoshi Logo" className="w-full h-full object-contain drop-shadow-md" />
         </div>
         <div className="flex flex-col">
-          <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff6933] to-[#e65100] hidden sm:block tracking-tight drop-shadow-sm group-hover:from-[#ff8a50] group-hover:to-[#ff6d00] transition-all">
+          <span className="text-lg md:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff6933] to-[#e65100] tracking-tight drop-shadow-sm group-hover:from-[#ff8a50] group-hover:to-[#ff6d00] transition-all">
             Dung Laoshi
           </span>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] hidden sm:block -mt-1 group-hover:text-orange-400 transition-colors">Chinese Master</span>
+          <span className="text-[8px] md:text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] -mt-0.5 md:-mt-1 group-hover:text-orange-400 transition-colors">Chinese Master</span>
         </div>
       </Link>
+
+      {/* Mobile Nav Trigger */}
+      <div className="md:hidden flex items-center">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="p-2">
+              <Menu className="w-6 h-6 text-gray-700" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-56 mt-2">
+            <DropdownMenuLabel>Menu</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {navItems.map((item) => (
+              <DropdownMenuItem key={item.href} asChild>
+                <Link
+                  href={item.href}
+                  className={`w-full flex items-center cursor-pointer ${pathname.startsWith(item.href) ? "text-[#ff6933] font-bold" : "text-gray-700"
+                    }`}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
       {/* Desktop Nav */}
       <div className="hidden md:flex items-center gap-1">

@@ -22,6 +22,7 @@ interface FlashcardClientProps {
   hskLevel: number
   currentPage: number
   totalPages: number
+  totalItems: number
 }
 
 interface FlashcardItemProps {
@@ -75,63 +76,63 @@ function FlashcardItem({ card, direction, onNext, onPrev, playAudio }: Flashcard
           style={{ transformStyle: "preserve-3d" }}
         >
           {/* Front */}
-          <div className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#ff9966] to-[#ff5e62] rounded-[2rem] shadow-xl border-4 border-white/20 flex flex-col items-center justify-center p-8 hover:shadow-2xl transition-shadow overflow-hidden">
+          <div className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#ff9966] to-[#ff5e62] rounded-[1.5rem] md:rounded-[2rem] shadow-xl border-4 border-white/20 flex flex-col items-center justify-center p-4 md:p-8 hover:shadow-2xl transition-shadow overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
 
-            <span className="text-base font-black text-white/80 uppercase tracking-[0.2em] mb-12 z-10">Mặt trước</span>
-            <h2 className="text-[7rem] md:text-[9rem] font-black text-white mb-10 leading-none drop-shadow-md z-10">{card.hanzi}</h2>
+            <span className="text-xs md:text-base font-black text-white/80 uppercase tracking-[0.2em] mb-4 md:mb-12 z-10">Mặt trước</span>
+            <h2 className="text-7xl md:text-[9rem] font-black text-white mb-6 md:mb-10 leading-none drop-shadow-md z-10">{card.hanzi}</h2>
 
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full bg-white/20 text-white hover:bg-white/30 hover:scale-110 active:scale-90 transition-all duration-200 w-16 h-16 z-10 backdrop-blur-sm cursor-pointer"
+              className="rounded-full bg-white/20 text-white hover:bg-white/30 hover:scale-110 active:scale-90 transition-all duration-200 w-12 h-12 md:w-16 md:h-16 z-20 backdrop-blur-sm cursor-pointer"
               onClick={(e) => playAudio(e, card.audio_url)}
             >
-              <Volume2 className="w-8 h-8" />
+              <Volume2 className="w-6 h-6 md:w-8 md:h-8" />
             </Button>
 
-            <p className="absolute bottom-8 text-base font-black text-white/90 animate-pulse z-10">Chạm để lật</p>
+            <p className="absolute bottom-4 md:bottom-8 text-xs md:text-base font-black text-white/90 animate-pulse z-10">Chạm để lật</p>
 
             {/* Teacher Cat Image (Absolute positioned) */}
             <img
               src="/teacher-cat.png"
               alt="Teacher Cat"
-              className="absolute -bottom-10 -right-10 w-48 h-48 object-contain mix-blend-multiply opacity-90 z-0 pointer-events-none transform -rotate-12"
+              className="absolute -bottom-6 -right-6 w-24 h-24 md:-bottom-10 md:-right-10 md:w-48 md:h-48 object-contain mix-blend-multiply opacity-90 z-0 pointer-events-none transform -rotate-12"
             />
           </div>
 
           {/* Back */}
           <div
-            className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#fffbf5] to-white rounded-[2rem] shadow-xl border-2 border-orange-200 flex flex-col items-center justify-center p-8 rotate-y-180 overflow-y-auto"
+            className="absolute inset-0 backface-hidden bg-gradient-to-br from-[#fffbf5] to-white rounded-[1.5rem] md:rounded-[2rem] shadow-xl border-2 border-orange-200 flex flex-col items-center justify-center p-3 md:p-8 rotate-y-180 overflow-y-auto"
             style={{ transform: "rotateY(180deg)" }}
           >
-            <div className="w-full flex flex-col items-center pt-2">
-              <div className="flex items-center gap-6 mb-4">
-                <h2 className="text-6xl font-black text-gray-900">{card.hanzi}</h2>
+            <div className="w-full flex flex-col items-center pt-0 md:pt-2">
+              <div className="flex items-center gap-3 md:gap-6 mb-2 md:mb-4">
+                <h2 className="text-4xl md:text-6xl font-black text-gray-900">{card.hanzi}</h2>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-full bg-orange-100 text-[#ff6933] hover:bg-orange-200 active:scale-90 transition-transform w-12 h-12 cursor-pointer"
+                  className="rounded-full bg-orange-100 text-[#ff6933] hover:bg-orange-200 active:scale-90 transition-transform w-8 h-8 md:w-12 md:h-12 cursor-pointer"
                   onClick={(e) => playAudio(e, card.audio_url)}
                 >
-                  <Volume2 className="w-6 h-6" />
+                  <Volume2 className="w-4 h-4 md:w-6 md:h-6" />
                 </Button>
               </div>
 
-              <p className="text-4xl font-black text-[#ff6933] font-mono mb-6 tracking-wide">{card.pinyin}</p>
+              <p className="text-2xl md:text-4xl font-black text-[#ff6933] font-mono mb-2 md:mb-6 tracking-wide">{card.pinyin}</p>
 
-              <div className="bg-white p-6 rounded-2xl border-2 border-orange-100 w-full mb-6 shadow-sm">
-                <p className="text-2xl text-gray-800 text-center font-bold leading-snug">
+              <div className="bg-white p-3 md:p-6 rounded-xl md:rounded-2xl border-2 border-orange-100 w-full mb-3 md:mb-6 shadow-sm">
+                <p className="text-lg md:text-2xl text-gray-800 text-center font-bold leading-snug">
                   {card.meaning}
                 </p>
               </div>
 
               {card.example && (
-                <div className="w-full bg-orange-50/80 p-5 rounded-2xl border border-orange-200 text-left space-y-3">
-                  <p className="text-xs font-black text-orange-600 uppercase tracking-wider">Ví dụ:</p>
-                  <p className="text-xl text-gray-900 font-bold leading-relaxed">{card.example}</p>
-                  <p className="text-lg text-gray-600 font-semibold italic">{card.example_pinyin}</p>
-                  <p className="text-lg text-gray-700 font-semibold">{card.example_meaning}</p>
+                <div className="w-full bg-orange-50/80 p-3 md:p-5 rounded-xl md:rounded-2xl border border-orange-200 text-left space-y-1 md:space-y-3">
+                  <p className="text-[10px] md:text-xs font-black text-orange-600 uppercase tracking-wider">Ví dụ:</p>
+                  <p className="text-sm md:text-xl text-gray-900 font-bold leading-relaxed">{card.example}</p>
+                  <p className="text-xs md:text-lg text-gray-600 font-semibold italic">{card.example_pinyin}</p>
+                  <p className="text-xs md:text-lg text-gray-700 font-semibold">{card.example_meaning}</p>
                 </div>
               )}
             </div>
@@ -142,7 +143,7 @@ function FlashcardItem({ card, direction, onNext, onPrev, playAudio }: Flashcard
   )
 }
 
-export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages }: FlashcardClientProps) {
+export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages, totalItems }: FlashcardClientProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -222,7 +223,7 @@ export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center min-h-[70vh] text-center w-full rounded-3xl p-8 relative overflow-hidden"
+        className="flex flex-col items-center justify-center min-h-[50vh] md:min-h-[70vh] text-center w-full rounded-3xl p-4 md:p-8 relative overflow-hidden"
       >
         {/* Background Gradient & Decor */}
         <div className={`absolute inset-0 bg-gradient-to-br ${isGraduation ? 'from-[#4facfe] via-[#00f2fe] to-[#43e97b]' : 'from-[#ffb347] via-[#ffcc33] to-[#ff6b6b]'} z-0`}></div>
@@ -230,58 +231,58 @@ export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages 
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center w-full">
-          <div className="relative mb-6">
+          <div className="relative mb-3 md:mb-6">
             <div className={`absolute -inset-4 ${isGraduation ? 'bg-blue-400/30' : 'bg-yellow-400/30'} rounded-full blur-2xl animate-pulse`}></div>
             <img
               src={heroImage}
               alt="Hero Cat"
-              className="w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
+              className="w-28 h-28 md:w-64 md:h-64 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
             />
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-black text-white drop-shadow-xl mb-2 tracking-wide font-serif leading-tight">
+          <h2 className="text-2xl md:text-5xl font-black text-white drop-shadow-xl mb-1 md:mb-2 tracking-wide font-serif leading-tight">
             {title}
           </h2>
-          <p className="text-xl font-bold text-white/90 mb-8 border-b-2 border-white/40 pb-2 px-8 shadow-sm">
+          <p className="text-sm md:text-xl font-bold text-white/90 mb-4 md:mb-8 border-b-2 border-white/40 pb-2 px-4 md:px-8 shadow-sm">
             {subtitle}
           </p>
 
-          <div className="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-xl mb-8">
-            <div className={`bg-black/20 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl flex flex-col items-center group hover:bg-black/30 transition-colors`}>
-              <div className="bg-red-500/20 p-2 rounded-full mb-2 border border-red-500/30">
-                <X className="w-6 h-6 text-red-100" />
+          <div className="grid grid-cols-3 gap-2 md:gap-6 w-full max-w-xl mb-4 md:mb-8">
+            <div className={`bg-black/20 backdrop-blur-md border border-white/20 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl flex flex-col items-center group hover:bg-black/30 transition-colors`}>
+              <div className="bg-red-500/20 p-1 md:p-2 rounded-full mb-1 md:mb-2 border border-red-500/30">
+                <X className="w-4 h-4 md:w-6 md:h-6 text-red-100" />
               </div>
-              <p className="text-xs text-white/90 font-bold uppercase mb-1 tracking-wider drop-shadow-sm">Chưa thuộc</p>
-              <p className="text-4xl font-black text-white drop-shadow-md">{sessionStats.unknown}</p>
+              <p className="text-[10px] md:text-xs text-white/90 font-bold uppercase mb-0 md:mb-1 tracking-wider drop-shadow-sm">Chưa thuộc</p>
+              <p className="text-2xl md:text-4xl font-black text-white drop-shadow-md">{sessionStats.unknown}</p>
             </div>
-            {/* ... other stats ... */}
-            <div className={`bg-black/20 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl flex flex-col items-center group hover:bg-black/30 transition-colors`}>
-              <div className="bg-orange-500/20 p-2 rounded-full mb-2 border border-orange-500/30">
-                <HelpCircle className="w-6 h-6 text-orange-100" />
+
+            <div className={`bg-black/20 backdrop-blur-md border border-white/20 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl flex flex-col items-center group hover:bg-black/30 transition-colors`}>
+              <div className="bg-orange-500/20 p-1 md:p-2 rounded-full mb-1 md:mb-2 border border-orange-500/30">
+                <HelpCircle className="w-4 h-4 md:w-6 md:h-6 text-orange-100" />
               </div>
-              <p className="text-xs text-white/90 font-bold uppercase mb-1 tracking-wider drop-shadow-sm">Chưa chắc</p>
-              <p className="text-4xl font-black text-white drop-shadow-md">{sessionStats.unsure}</p>
+              <p className="text-[10px] md:text-xs text-white/90 font-bold uppercase mb-0 md:mb-1 tracking-wider drop-shadow-sm">Chưa chắc</p>
+              <p className="text-2xl md:text-4xl font-black text-white drop-shadow-md">{sessionStats.unsure}</p>
             </div>
-            <div className={`bg-black/20 backdrop-blur-md border border-white/20 p-4 rounded-2xl shadow-xl flex flex-col items-center group hover:bg-black/30 transition-colors`}>
-              <div className="bg-green-500/20 p-2 rounded-full mb-2 border border-green-500/30">
-                <Check className="w-6 h-6 text-green-100" />
+            <div className={`bg-black/20 backdrop-blur-md border border-white/20 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl flex flex-col items-center group hover:bg-black/30 transition-colors`}>
+              <div className="bg-green-500/20 p-1 md:p-2 rounded-full mb-1 md:mb-2 border border-green-500/30">
+                <Check className="w-4 h-4 md:w-6 md:h-6 text-green-100" />
               </div>
-              <p className="text-xs text-white/90 font-bold uppercase mb-1 tracking-wider drop-shadow-sm">Đã thuộc</p>
-              <p className="text-4xl font-black text-white drop-shadow-md">{sessionStats.known}</p>
+              <p className="text-[10px] md:text-xs text-white/90 font-bold uppercase mb-0 md:mb-1 tracking-wider drop-shadow-sm">Đã thuộc</p>
+              <p className="text-2xl md:text-4xl font-black text-white drop-shadow-md">{sessionStats.known}</p>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
             <Button
               onClick={handleRestart}
-              className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/50 backdrop-blur-sm h-12 px-6 rounded-xl font-bold shadow-lg active:scale-95 transition-all text-base"
+              className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/50 backdrop-blur-sm h-10 md:h-12 px-4 md:px-6 rounded-xl font-bold shadow-lg active:scale-95 transition-all text-sm md:text-base"
             >
-              <RotateCcw className="w-5 h-5 mr-2" /> Học lại
+              <RotateCcw className="w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2" /> Học lại
             </Button>
 
             <Button
               onClick={() => router.push(`/learn?level=${hskLevel}`)}
-              className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/50 backdrop-blur-sm h-12 px-6 rounded-xl font-bold shadow-lg active:scale-95 transition-all text-base"
+              className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/50 backdrop-blur-sm h-10 md:h-12 px-4 md:px-6 rounded-xl font-bold shadow-lg active:scale-95 transition-all text-sm md:text-base"
             >
               Về danh sách
             </Button>
@@ -289,17 +290,17 @@ export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages 
             {(currentPage < totalPages) && !isGraduation && (
               <Button
                 onClick={() => handlePageChange((currentPage + 1).toString())}
-                className="bg-white text-[#ff6b6b] hover:bg-yellow-50 h-12 px-8 rounded-xl font-black text-base shadow-xl active:scale-95 transition-all hover:shadow-2xl border-b-4 border-yellow-100"
+                className="bg-white text-[#ff6b6b] hover:bg-yellow-50 h-10 md:h-12 px-6 md:px-8 rounded-xl font-black text-sm md:text-base shadow-xl active:scale-95 transition-all hover:shadow-2xl border-b-4 border-yellow-100"
               >
-                Trang tiếp theo <ChevronRight className="w-5 h-5 ml-1" />
+                Trang tiếp theo <ChevronRight className="w-4 h-4 md:w-5 md:h-5 ml-1" />
               </Button>
             )}
             {isGraduation && (
               <Button
                 onClick={() => router.push(`/learn`)}
-                className="bg-white text-[#43e97b] hover:bg-green-50 h-12 px-8 rounded-xl font-black text-base shadow-xl active:scale-95 transition-all hover:shadow-2xl border-b-4 border-green-100"
+                className="bg-white text-[#43e97b] hover:bg-green-50 h-10 md:h-12 px-6 md:px-8 rounded-xl font-black text-sm md:text-base shadow-xl active:scale-95 transition-all hover:shadow-2xl border-b-4 border-green-100"
               >
-                Hoàn tất khóa học <Check className="w-5 h-5 ml-1" />
+                Hoàn tất khóa học <Check className="w-4 h-4 md:w-5 md:h-5 ml-1" />
               </Button>
             )}
           </div>
@@ -344,21 +345,24 @@ export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages 
   return (
     <div className="max-w-3xl mx-auto flex flex-col items-center pt-0 pb-4 px-2 min-h-[60vh]">
       {/* Header controls (Back + Pagination + Count) */}
-      <div className="w-full flex items-center justify-between mb-4">
+      <div className="w-full flex items-center justify-between mb-2">
         <Button
           variant="ghost"
           size="sm"
-          className="pl-0 hover:bg-transparent hover:text-[#ff6933] text-gray-800 font-black text-base -ml-2 cursor-pointer"
+          className="pl-0 hover:bg-transparent hover:text-[#ff6933] text-gray-800 font-bold text-sm md:text-base -ml-2 cursor-pointer"
           onClick={() => router.push(`/learn?level=${hskLevel}`)}
         >
-          <ChevronLeft className="w-6 h-6 mr-1" /> Quay lại
+          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 mr-1" /> Quay lại
         </Button>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-base font-black text-gray-800">Trang:</span>
+        <div className="flex items-center gap-2 md:gap-4">
+          <span className="text-[10px] md:text-sm font-bold text-gray-500 bg-gray-50 px-2 py-1 md:px-3 md:py-1.5 rounded-lg border border-gray-100 whitespace-nowrap">
+            Tổng: {totalItems}
+          </span>
+          <div className="flex items-center gap-1 md:gap-2">
+            <span className="text-base font-black text-gray-800 hidden md:inline-block">Trang:</span>
             <Select value={currentPage.toString()} onValueChange={handlePageChange}>
-              <SelectTrigger className="w-auto min-w-[90px] h-10 !bg-white border-2 border-gray-200 font-black !text-gray-900 text-base shadow-sm cursor-pointer data-[placeholder]:text-gray-900">
+              <SelectTrigger className="w-auto min-w-[60px] md:min-w-[90px] h-8 md:h-10 !bg-white border-2 border-gray-200 font-black !text-gray-900 text-xs md:text-base shadow-sm cursor-pointer data-[placeholder]:text-gray-900">
                 <SelectValue placeholder="Trang" />
               </SelectTrigger>
               <SelectContent className="!bg-white border-2 border-gray-200 !text-gray-900 z-[9999]">
@@ -370,16 +374,24 @@ export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages 
               </SelectContent>
             </Select>
           </div>
-          <span className="text-base font-black text-gray-800 bg-gray-100 px-4 py-2 rounded-lg border border-gray-200">
+          <span className="text-xs md:text-base font-black text-gray-800 bg-gray-100 px-2 py-1.5 md:px-4 md:py-2 rounded-lg border border-gray-200">
             {currentIndex + 1} / {vocabulary.length}
           </span>
         </div>
       </div>
 
-      <Progress value={progress} className="h-2 w-full mb-6 bg-gray-200 rounded-full" />
+      <div className="w-full mb-4">
+        <div className="flex justify-between items-end mb-1 px-1">
+          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Tiến độ</span>
+          <span className="text-sm font-black text-[#ff6933]">
+            {currentIndex + 1} <span className="text-gray-400 text-xs">/ {vocabulary.length}</span>
+          </span>
+        </div>
+        <Progress value={progress} className="h-2 w-full bg-gray-200 rounded-full" />
+      </div>
 
       {/* Flashcard Area */}
-      <div className="w-full relative h-[450px] md:h-[500px]">
+      <div className="w-full relative h-[320px] md:h-[500px]">
         <AnimatePresence mode="popLayout" custom={direction}>
           <FlashcardItem
             key={currentIndex}
@@ -421,3 +433,4 @@ export function FlashcardClient({ vocabulary, hskLevel, currentPage, totalPages 
     </div>
   )
 }
+// End of component

@@ -23,7 +23,7 @@ export default async function UserLayout({
   return (
     <div className="min-h-screen bg-[#fcfbf8] font-display">
       <UserNav user={user} role={profile?.role || "user"} />
-      <main className="max-w-7xl mx-auto p-4 md:p-8">
+      <main className="max-w-7xl mx-auto p-4 ">
         {children}
       </main>
     </div>

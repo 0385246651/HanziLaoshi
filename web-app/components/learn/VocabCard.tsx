@@ -31,12 +31,12 @@ export function VocabCard({ vocab }: VocabCardProps) {
 
   return (
     <div className={cn(
-      "relative group bg-white rounded-2xl border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center p-6 text-center h-[260px] cursor-default"
+      "relative group bg-white rounded-2xl border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col items-center justify-center p-4 sm:p-6 text-center h-[200px] sm:h-[260px] cursor-default"
     )}>
       {/* Content */}
       <div className="space-y-2 mt-2">
-        <h3 className="text-4xl font-black text-gray-800 mb-1">{vocab.hanzi}</h3>
-        <p className="text-lg font-medium text-[#ff6933] font-mono">{vocab.pinyin}</p>
+        <h3 className="text-3xl sm:text-4xl font-black text-gray-800 mb-1">{vocab.hanzi}</h3>
+        <p className="text-base sm:text-lg font-medium text-[#ff6933] font-mono">{vocab.pinyin}</p>
         <p className="text-gray-600 line-clamp-2 px-2 text-sm">{vocab.meaning}</p>
       </div>
 
@@ -44,7 +44,8 @@ export function VocabCard({ vocab }: VocabCardProps) {
       <Button
         variant="ghost"
         size="icon"
-        className="mt-6 rounded-full hover:bg-orange-50 hover:text-[#ff6933] text-gray-400 cursor-pointer active:scale-90 transition-transform"
+        size="icon"
+        className="mt-4 sm:mt-6 rounded-full hover:bg-orange-50 hover:text-[#ff6933] text-gray-400 cursor-pointer active:scale-90 transition-transform"
         onClick={playAudio}
       >
         <Volume2 className="w-5 h-5" />

@@ -31,6 +31,7 @@ export default function RootLayout({
     <html lang="vi" suppressHydrationWarning>
       <body
         className={`${splineSans.variable} ${notoSans.variable} font-display antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
@@ -39,6 +40,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+
+          <footer className="py-8 text-center">
+            <p className="text-[10px] text-[#a19985] font-medium tracking-wide">
+              @made by Hải Bá Bá 2025 with DungLaoshi class
+            </p>
+          </footer>
+
           <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
