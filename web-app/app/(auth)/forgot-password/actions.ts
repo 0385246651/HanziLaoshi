@@ -5,7 +5,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function forgotPassword(formData: FormData) {
-  console.log("--- FORGOT PASSWORD ACTION STARTED ---");
   const email = formData.get("email") as string;
 
   try {
@@ -17,17 +16,14 @@ export async function forgotPassword(formData: FormData) {
       headersList.get("origin") ||
       process.env.NEXT_PUBLIC_BASE_URL ||
       "http://localhost:3000";
-    console.log("Origin determined:", origin);
 
     // Validate email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      console.log("Invalid email submission:", email);
       redirect(
         `/forgot-password?error=${encodeURIComponent("Email không hợp lệ")}`
       );
     }
 
-    console.log("Sending reset password email to:", email);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${origin}/auth/callback?next=/reset-password`,
     });
@@ -48,7 +44,6 @@ export async function forgotPassword(formData: FormData) {
       );
     }
 
-    console.log("Email sent successfully. Redirecting...");
     // Success redirect
     redirect(
       `/forgot-password?message=${encodeURIComponent(

@@ -72,7 +72,7 @@ export function ExcelUploader() {
 
             if (foundHeaderIndex !== -1) {
               headerRowIndex = foundHeaderIndex;
-              console.log(`Found Header at Row ${headerRowIndex} in sheet ${sheetName}`);
+
             } else {
               console.warn(`No header found in sheet ${sheetName}, using first row.`);
             }
@@ -138,7 +138,7 @@ export function ExcelUploader() {
             });
           })
 
-          console.log(`Parsed: ${allValidData.length} valid, ${allSkipped.length} skipped.`);
+
           resolve({ validData: allValidData, skipped: allSkipped })
         } catch (error) {
           console.error("Error parsing excel:", error);

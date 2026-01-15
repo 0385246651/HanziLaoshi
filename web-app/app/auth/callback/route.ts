@@ -10,22 +10,12 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
 
-  console.log("--- AUTH CALLBACK HIT ---");
-  console.log("Params:", {
-    token_hash: token_hash ? "PRESENT" : "MISSING",
-    type,
-    code: code ? "PRESENT" : "MISSING",
-    next,
-  });
-
   // Handle PKCE Code Exchange
   if (code) {
-    console.log("Attempting PKCE Code Exchange...");
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      console.log("PKCE Success!");
       const isPasswordReset = next === "/reset-password";
       const redirectTo = request.nextUrl.clone();
       redirectTo.pathname = next;
@@ -50,7 +40,6 @@ export async function GET(request: NextRequest) {
 
   // Handle Implicit/OTP Verification
   if (token_hash && type) {
-    console.log(`Attempting OTP Verification (Type: ${type})...`);
     const supabase = await createClient();
 
     const { error } = await supabase.auth.verifyOtp({
@@ -58,7 +47,6 @@ export async function GET(request: NextRequest) {
       token_hash,
     });
     if (!error) {
-      console.log("OTP Verification Success!");
       // redirect user to specified redirect URL or root of app
       const redirectTo = request.nextUrl.clone();
       redirectTo.pathname = next;
@@ -87,7 +75,6 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  console.log("Auth Verify Failed - No valid params");
   // return the user to an error page with some instructions
   const redirectTo = request.nextUrl.clone();
   redirectTo.pathname = "/login";
