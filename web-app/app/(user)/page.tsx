@@ -18,7 +18,7 @@ export default async function Index() {
 
   if (user) {
     // Reuse the stats fetching logic from /learn
-    stats = await getUserStats(user.id)
+    stats = await getUserStats()
 
     // Mocking user name from metadata if available
     if (user.user_metadata?.full_name) {
