@@ -26,23 +26,23 @@ export function UserNav({ user, role }: { user: any, role?: string }) {
   ];
 
   return (
-    <nav className="h-16 bg-white border-b border-gray-100 px-4 md:px-8 flex items-center justify-between sticky top-0 z-40 shadow-sm">
+    <nav className="h-16 bg-white border-b border-gray-100 px-4 lg:px-8 flex items-center justify-between sticky top-0 z-40 shadow-sm">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-3 group">
-        <div className="w-14 h-14 relative group-hover:scale-110 transition-transform duration-300">
+      <Link href="/" className="flex items-center gap-2 lg:gap-3 group flex-shrink-0">
+        <div className="w-10 h-10 lg:w-14 lg:h-14 relative group-hover:scale-110 transition-transform duration-300">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/teacher-cat.png" alt="Dung Laoshi Logo" className="w-full h-full object-contain drop-shadow-md" />
         </div>
         <div className="flex flex-col">
-          <span className="text-lg md:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff6933] to-[#e65100] tracking-tight drop-shadow-sm group-hover:from-[#ff8a50] group-hover:to-[#ff6d00] transition-all">
+          <span className="text-base lg:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#ff6933] to-[#e65100] tracking-tight drop-shadow-sm group-hover:from-[#ff8a50] group-hover:to-[#ff6d00] transition-all whitespace-nowrap">
             Dung Laoshi
           </span>
-          <span className="text-[8px] md:text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] -mt-0.5 md:-mt-1 group-hover:text-orange-400 transition-colors">Chinese Master</span>
+          <span className="text-[7px] lg:text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] lg:tracking-[0.2em] -mt-0.5 lg:-mt-1 group-hover:text-orange-400 transition-colors">Chinese Master</span>
         </div>
       </Link>
 
-      {/* Mobile Nav Trigger */}
-      <div className="md:hidden flex items-center">
+      {/* Mobile/Tablet Nav Trigger (visible until lg breakpoint) */}
+      <div className="lg:hidden flex items-center">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="p-2">
@@ -68,8 +68,8 @@ export function UserNav({ user, role }: { user: any, role?: string }) {
         </DropdownMenu>
       </div>
 
-      {/* Desktop Nav */}
-      <div className="hidden md:flex items-center gap-1">
+      {/* Desktop Nav (only visible from lg breakpoint) */}
+      <div className="hidden lg:flex items-center gap-1">
         {navItems.map((item) => (
           <Link
             key={item.href}
